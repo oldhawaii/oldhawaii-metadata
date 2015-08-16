@@ -18,6 +18,7 @@
     {% block css %}
         {% block css_shared %}
         <link rel="stylesheet" href="{{ url_for('static', filename='components/bootstrap/dist/css/bootstrap.min.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
         {% endblock css_shared %}
         {% block css_custom %}{% endblock css_custom %}
     {% endblock css%}
@@ -109,7 +110,6 @@
     {% block footer %}
     <footer>
     {% block footer_content %}
-        <p>&copy;</p>
     {% endblock footer_content %}
     </footer>
     {% endblock footer %}

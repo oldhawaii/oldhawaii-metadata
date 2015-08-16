@@ -9,9 +9,16 @@ var gulp = require('gulp'),
     uglify = require('gulp-uglify');
 
 
+function handleError(err) {
+  console.log(err.toString());
+  this.emit('end');
+}
+
+
 gulp.task('transform', function () {
   return gulp.src('./oldhawaii_metadata/apps/static/jsx/**/*.js')
     .pipe(browserify({transform: ['reactify']}))
+    .on('error', handleError)
     .pipe(gulp.dest('./oldhawaii_metadata/apps/static/js'))
     .pipe(size());
 });

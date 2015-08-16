@@ -19,6 +19,7 @@ var paths = {
 }
 
 function clean(cb) {
+  console.log('-> cleaning...');
   del([paths.DST], cb);
 }
 
@@ -30,6 +31,9 @@ function compile(watch) {
   }
 
   function rebundle() {
+
+    console.log('-> bundling...');
+
     bundler.bundle()
       .on('error', function(err) { console.error(err); this.emit('end'); })
       .pipe(source(paths.SRC))
@@ -43,7 +47,7 @@ function compile(watch) {
 
   if (watch) {
     bundler.on('update', function() {
-      console.log('-> bundling...');
+      clean();
       rebundle();
     });
   }

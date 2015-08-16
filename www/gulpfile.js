@@ -16,7 +16,6 @@ gulp.task('transform', function () {
     .pipe(size());
 });
 
-
 gulp.task('clean', function () {
   return gulp.src(['./oldhawaii_metadata/apps/static/js'], {read: false})
              .pipe(clean());
@@ -25,7 +24,5 @@ gulp.task('clean', function () {
 
 gulp.task('default', ['clean'], function () {
   gulp.start('transform');
-  gulp.watch('./oldhawaii_metadata/apps/static/jsx/main.js', ['transform']);
+  gulp.watch('./oldhawaii_metadata/apps/static/jsx/app.js', ['transform']);
 });
-
-

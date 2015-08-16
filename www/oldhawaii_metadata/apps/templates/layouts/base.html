@@ -1,0 +1,147 @@
+<!doctype html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+    <title>{% block title %}{% endblock title %}</title>
+
+    {% block meta %}
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="description" content="{% block meta_description %} {% endblock meta_description %}" />
+    <meta name="author" content="{% block meta_author %}{% endblock meta_author %}" />
+    <meta name="viewport" content="width=device-width" />
+    {% endblock meta %}
+
+    {% block css %}
+        {% block css_shared %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='components/bootstrap/dist/css/bootstrap.min.css') }}" />
+        {% endblock css_shared %}
+        {% block css_custom %}{% endblock css_custom %}
+    {% endblock css%}
+</head>
+
+{% block body %}
+<body{% block body_attrs %}{% endblock body_attrs %}>
+    <!-- Prompt IE 6 users to install Chrome Frame. Remove this if you support IE 6.
+       chromium.org/developers/how-tos/chrome-frame-getting-started -->
+    <!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
+    {% block header %}
+    <header>
+    {% block header_content %}
+        <div class="navbar navbar-inverse navbar-static-top">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#">Project name</a>
+            </div>
+            <div class="navbar-collapse collapse">
+              <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li class="divider"></li>
+                    <li class="dropdown-header">Nav header</li>
+                    <li><a href="#">Separated link</a></li>
+                    <li><a href="#">One more separated link</a></li>
+                  </ul>
+                </li>
+              </ul>
+              {% if current_user.is_authenticated() %}
+              <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Aloha, {{current_user.username }}<b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="{{ url_for('users.logout')}}">Logout</a></li>
+                  </ul>
+                </li>
+              </ul>
+              {% else %}
+              <form action="{{ url_for('users.login') }}" class="navbar-form navbar-right" method="POST">
+                {{ form.csrf_token }}
+                <div class="form-group">
+                  {{ form.email(placeholder="Email", class_="form-control") }}
+                </div>
+                <div class="form-group">
+                  {{ form.password(placeholder="Password", class_="form-control") }}
+                </div>
+                <button type="submit" class="btn btn-success">Sign in</button>
+              </form>
+              {% endif %}
+            </div><!--/.navbar-collapse -->
+          </div>
+        </div>
+    {% endblock header_content %}
+    </header>
+    {% endblock header %}
+
+    {% block main %}
+    <div role="main" class="container">
+        {% block main_content %}
+            <div class="jumbotron">
+              <div class="container">
+                <h1>Hello, world!</h1>
+                <p>This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+                <p><a class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+              </div>
+            </div>
+            <div class="container">
+              <!-- Example row of columns -->
+              <div class="row">
+                <div class="col-lg-4">
+                  <h2>Heading</h2>
+                  <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+                  <p><a class="btn btn-default" href="#">View details &raquo;</a></p>
+                </div>
+                <div class="col-lg-4">
+                  <h2>Heading</h2>
+                  <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+                  <p><a class="btn btn-default" href="#">View details &raquo;</a></p>
+               </div>
+                <div class="col-lg-4">
+                  <h2>Heading</h2>
+                  <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+                  <p><a class="btn btn-default" href="#">View details &raquo;</a></p>
+                </div>
+              </div>
+
+              <hr>
+            </div> 
+        {% endblock main_content %}
+    </div>
+    {% endblock main %}
+
+    {% block footer %}
+    <footer>
+    {% block footer_content %}
+        <p>&copy;</p>
+    {% endblock footer_content %}
+    </footer>
+    {% endblock footer %}
+
+    {% block js %}
+        {% block js_shared %}
+            <script src="{{ url_for('static', filename='components/react/react-with-addons.min.js') }}"></script>
+            <script src="{{ url_for('static', filename='components/jquery/dist/jquery.min.js') }}"></script>
+            <script src="{{ url_for('static', filename='components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+            <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+        {% endblock js_shared %}
+        {% block js_custom %}{% endblock js_custom %}
+    {% endblock js %}
+
+    {% include 'shared/ga.html' %}
+</body>
+{% endblock body %}
+</html>

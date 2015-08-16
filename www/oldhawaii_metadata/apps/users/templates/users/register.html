@@ -1,0 +1,17 @@
+{% import 'shared/_forms.html' as forms %}
+
+{% extends 'layouts/base.html' %}
+
+{% block main_content %}
+
+<div class="container">
+
+<form action="{{ url_for('users.register') }}" method="POST">
+    {{ form.csrf_token }}
+    {{ forms.render(form) }}
+    <p><input type="Submit" value="Register"></p>
+</form>
+
+</div>
+
+{% endblock main_content %}

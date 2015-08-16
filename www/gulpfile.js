@@ -10,7 +10,7 @@ var gulp = require('gulp'),
 
 
 gulp.task('transform', function () {
-  return gulp.src('./oldhawaii_metadata/apps/static/jsx/app.js')
+  return gulp.src('./oldhawaii_metadata/apps/static/jsx/**/*.js')
     .pipe(browserify({transform: ['reactify']}))
     .pipe(gulp.dest('./oldhawaii_metadata/apps/static/js'))
     .pipe(size());
@@ -24,5 +24,5 @@ gulp.task('clean', function () {
 
 gulp.task('default', ['clean'], function () {
   gulp.start('transform');
-  gulp.watch('./oldhawaii_metadata/apps/static/jsx/app.js', ['transform']);
+  gulp.watch('./oldhawaii_metadata/apps/static/jsx/**/*.js', ['transform']);
 });

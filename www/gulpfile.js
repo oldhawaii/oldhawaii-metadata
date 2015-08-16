@@ -1,35 +1,59 @@
 'use strict';
 
 var gulp = require('gulp'),
-    browserify = require('gulp-browserify'),
-    clean = require('gulp-clean'),
-    concat = require('gulp-concat'),
-    htmlreplace = require('gulp-html-replace'),
+    babel = require('babelify'),
+    browserify = require('browserify'),
+    buffer = require('vinyl-buffer'),
+    del = require('del'),
+    rename = require('gulp-rename'),
     size = require('gulp-size'),
-    uglify = require('gulp-uglify');
+    sourcemaps = require('gulp-sourcemaps'),
+    source = require('vinyl-source-stream'),
+    watchify = require('watchify');
 
 
-function handleError(err) {
-  console.log(err.toString());
-  this.emit('end');
+var paths = {
+  SRC: './oldhawaii_metadata/apps/static/jsx/app.js',
+  DST: './oldhawaii_metadata/apps/static/js',
+  DST_FILENAME: 'bundle.js'
 }
 
+function clean(cb) {
+  del([paths.DST], cb);
+}
 
-gulp.task('transform', function () {
-  return gulp.src('./oldhawaii_metadata/apps/static/jsx/**/*.js')
-    .pipe(browserify({transform: ['reactify']}))
-    .on('error', handleError)
-    .pipe(gulp.dest('./oldhawaii_metadata/apps/static/js'))
-    .pipe(size());
-});
+function compile(watch) {
+  var bundler = browserify(paths.SRC, { cache: {}, packageCache: {}, debug: true }).transform(babel);
 
-gulp.task('clean', function () {
-  return gulp.src(['./oldhawaii_metadata/apps/static/js'], {read: false})
-             .pipe(clean());
-});
+  if (watch) {
+    bundler = watchify(bundler);
+  }
 
+  function rebundle() {
+    bundler.bundle()
+      .on('error', function(err) { console.error(err); this.emit('end'); })
+      .pipe(source(paths.SRC))
+      .pipe(buffer())
+      .pipe(sourcemaps.init({ loadMaps: true }))
+      .pipe(sourcemaps.write('./'))
+      .pipe(size())
+      .pipe(rename(paths.DST_FILENAME))
+      .pipe(gulp.dest(paths.DST));
+  }
 
-gulp.task('default', ['clean'], function () {
-  gulp.start('transform');
-  gulp.watch('./oldhawaii_metadata/apps/static/jsx/**/*.js', ['transform']);
-});
+  if (watch) {
+    bundler.on('update', function() {
+      console.log('-> bundling...');
+      rebundle();
+    });
+  }
+
+  rebundle();
+}
+
+function watch() { return compile(true); };
+
+gulp.task('build', function(cb) { return compile(); });
+gulp.task('clean', function(cb) { return clean(cb); });
+gulp.task('watch', function(cb) { return watch(); });
+gulp.task('default', ['clean', 'watch']);

@@ -1,8 +1,10 @@
 'use strict';
 
-var Metadata = function (title, description) {
+class Metadata extends {
+  constructor(title, description) {
     this.title = title;
     this.description = description;
+  }
 };
 
-module.exports = Metadata;
+export default Metadata;

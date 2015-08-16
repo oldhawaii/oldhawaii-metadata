@@ -1,7 +1,7 @@
 'use strict';
 
-var React = require('react');
-var MetadataForm = require('./components/MetadataForm');
+import React from 'react';
+import MetadataForm from './components/MetadataForm';
 
 document.addEventListener('DOMContentLoaded', function () {
   React.render(

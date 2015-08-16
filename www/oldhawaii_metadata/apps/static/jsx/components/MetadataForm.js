@@ -1,23 +1,31 @@
 'use strict';
 
-var React = require('react');
+import React from 'react';
 
-var MetadataForm = React.createClass({
-  displayName: 'MetadataForm',
-  getInitialState: function() {
-    return {'title': '', 'description': ''};
-  },
-  handleChange: function (key) {
+class MetadataForm extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {'title': '', 'description': ''};
+  }
+
+  displayName() {
+    return 'MetadataForm';
+  }
+
+  handleChange(key) {
     return function (e) {
       var state = {};
       state[key] = e.target.value;
       this.setState(state);
     }.bind(this);
-  },
-  submitMetadata: function (event) {
+  }
+
+  submitMetadata(event) {
     event.preventDefault();
-  },
-  render: function () {
+  }
+
+  render() {
     return (
       <form role="form" onSubmit={this.submitMetadata}>
         <div className="form-group">
@@ -41,6 +49,6 @@ var MetadataForm = React.createClass({
       </form>
     );
   }
-});
+};
 
-module.exports = MetadataForm
+export default MetadataForm;

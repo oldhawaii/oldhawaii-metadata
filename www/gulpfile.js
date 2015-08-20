@@ -13,18 +13,22 @@ var gulp = require('gulp'),
 
 
 var paths = {
-  SRC: './oldhawaii_metadata/apps/static/jsx/app.js',
-  DST: './oldhawaii_metadata/apps/static/js',
-  DST_FILENAME: 'bundle.js'
+  js: {
+    src: './oldhawaii_metadata/apps/static/jsx/',
+    src_files: './oldhawaii_metadata/apps/static/jsx/app.js',
+    dst: './oldhawaii_metadata/apps/static/js',
+    dst_filename: 'bundle.js'
+  }
+
 }
 
 function clean(cb) {
   console.log('-> cleaning...');
-  del([paths.DST], cb);
+  del([paths.js.dst], cb);
 }
 
 function compile(watch) {
-  var bundler = browserify(paths.SRC, { cache: {}, packageCache: {}, debug: true }).transform(babel);
+  var bundler = browserify(paths.js.src_files, { cache: {}, packageCache: {}, debug: true }).transform(babel);
 
   if (watch) {
     bundler = watchify(bundler);
@@ -36,13 +40,13 @@ function compile(watch) {
 
     bundler.bundle()
       .on('error', function(err) { console.error(err); this.emit('end'); })
-      .pipe(source(paths.SRC))
+      .pipe(source(paths.js.src_files))
       .pipe(buffer())
       .pipe(sourcemaps.init({ loadMaps: true }))
       .pipe(sourcemaps.write('./'))
       .pipe(size())
-      .pipe(rename(paths.DST_FILENAME))
-      .pipe(gulp.dest(paths.DST));
+      .pipe(rename(paths.js.dst_filename))
+      .pipe(gulp.dest(paths.js.dst));
   }
 
   if (watch) {

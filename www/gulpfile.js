@@ -1,11 +1,13 @@
 'use strict';
 
 var gulp = require('gulp'),
+    autoprefix = require('gulp-autoprefixer'),
     babel = require('babelify'),
     browserify = require('browserify'),
     buffer = require('vinyl-buffer'),
     del = require('del'),
     rename = require('gulp-rename'),
+    sass = require('gulp-sass'),
     size = require('gulp-size'),
     sourcemaps = require('gulp-sourcemaps'),
     source = require('vinyl-source-stream'),
@@ -18,8 +20,13 @@ var paths = {
     src_files: './oldhawaii_metadata/apps/static/jsx/app.js',
     dst: './oldhawaii_metadata/apps/static/js',
     dst_filename: 'bundle.js'
+  },
+  styles: {
+    src: './oldhawaii_metadata/apps/static/sass',
+    src_files: './oldhawaii_metadata/apps/static/sass/**/*.scss',
+    dst: './oldhawaii_metadata/apps/static/css',
+    dst_filename: 'style.css'
   }
-
 }
 
 function clean(cb) {
@@ -61,7 +68,22 @@ function compile(watch) {
 
 function watch() { return compile(true); };
 
+function styles() {
+  gulp.src(paths.styles.src_files)
+      .pipe(sourcemaps.init())
+      .pipe(sass({
+          outputStyle: 'compressed',
+          sourceComments: 'map',
+          includePaths : [paths.styles.src]
+      }))
+      .on('error', function(err) { console.error(err); this.emit('end'); })
+      .pipe(autoprefix('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
+      .pipe(rename(paths.styles.dst_filename))
+      .pipe(gulp.dest(paths.styles.dst))
+}
+
 gulp.task('build', function(cb) { return compile(); });
 gulp.task('clean', function(cb) { return clean(cb); });
+gulp.task('styles', function(cb) { return styles(); });
 gulp.task('watch', function(cb) { return watch(); });
 gulp.task('default', ['clean', 'watch']);

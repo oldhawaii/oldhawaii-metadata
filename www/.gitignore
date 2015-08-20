@@ -62,5 +62,6 @@ oldhawaii_metadata/apps/static/components/**/*
 # node
 node_modules
 
-# js files
+# js / css files
 oldhawaii_metadata/apps/static/js/**/*
+oldhawaii_metadata/apps/static/css/**/*

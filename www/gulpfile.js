@@ -78,6 +78,7 @@ function styles() {
     }))
     .on('error', function(err) { console.error(err); this.emit('end'); })
     .pipe(autoprefix('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
+    .pipe(size())
     .pipe(rename(paths.styles.dst_filename))
     .pipe(gulp.dest(paths.styles.dst))
 }
@@ -91,4 +92,4 @@ gulp.task('clean', function(cb) { return clean(cb); });
 gulp.task('styles', function(cb) { return styles(); });
 gulp.task('watch', function(cb) { return watch(); });
 gulp.task('watch:styles', function(cb) { return watch_styles(); });
-gulp.task('default', ['clean', 'watch:styles']);
+gulp.task('default', ['clean', 'watch', 'watch:styles']);

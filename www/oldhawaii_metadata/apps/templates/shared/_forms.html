@@ -1,17 +1,21 @@
-{% macro render(form) -%}
+{% macro render(form, with_labels=true) -%}
 
 <fieldset>
 {% for field in form %}
 {% if field.type in ['CSRFTokenField', 'HiddenField'] or field.widget.input_type in ['hidden'] %}
 {% else %}
-  <div class="form-group">
+  <div class="form-group {% if field.errors %}has-error has-feedback{% endif %}">
+    {% if with_labels %}
     {{ field.label }}
-    {% if field.errors%}
-      <div class="alert alert-danger" role="alert">
-      {{ field.errors|join(' ') }}
-      </div>
     {% endif %}
     {{ field(class_="form-control") }}
+    <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+    <span id="{{ field.name | lower }}_error" class="sr-only">(error)</span>
+    {% if field.errors%}
+      <p class="text-danger" role="alert">
+      <small>{{ field.errors|join(' ') }}</small>
+      </p>
+    {% endif %}
   </div>
 {% endif %}
 {% endfor %}

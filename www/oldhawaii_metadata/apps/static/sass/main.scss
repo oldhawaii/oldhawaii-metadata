@@ -1,8 +1,14 @@
-$color: #99cc00;
-
 body {
-  background-color: $color;
-  .sub {
-    color: $color;
+  #signin {
+    margin: 0 auto;
+    padding:2em;
+    width: 400px;
+    border:1px solid #eee;
+  }
+  #register {
+    margin: 0 auto;
+    padding:2em;
+    width: 800px;
+    border:1px solid #eee;
   }
 }

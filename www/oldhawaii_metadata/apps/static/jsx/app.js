@@ -7,6 +7,7 @@ import MetadataFormContainer from './containers/MetadataFormContainer';
 
 
 const store = configureStore();
+
 let mainElement = document.getElementById('main');
 
 document.addEventListener('DOMContentLoaded', function () {

@@ -3,6 +3,8 @@
 
 import os
 from os import environ as env
+from oldhawaii_metadata.apps.api import metadata_api
+from oldhawaii_metadata.apps.metadatas import metadatas
 from oldhawaii_metadata.apps.www import www
 from oldhawaii_metadata.apps.users import users
 
@@ -27,7 +29,7 @@ class DefaultConfig(object):
     STATIC_DIR = os.path.join(PROJECT_ROOT, 'oldhawaii_metadata', 'apps', 'static')
     TEMPLATE_DIR = os.path.join(PROJECT_ROOT, 'oldhawaii_metadata', 'apps', 'templates')
 
-    BLUEPRINTS = (www, users)
+    BLUEPRINTS = (metadatas, metadata_api, www, users)
 
     LOG_INI = 'etc/logging.ini.json'
 

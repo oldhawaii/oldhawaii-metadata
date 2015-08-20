@@ -27,6 +27,7 @@ def login():
     if form.validate_on_submit():
         login_user(form.user, remember=form.remember.data)
         return redirect(url_for('www.slash'))
+    print form.__dict__
     return render_template('users/login.html', form=form)
 
 

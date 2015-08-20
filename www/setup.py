@@ -64,7 +64,8 @@ requires = [
     'Flask-SQLAlchemy>=2.0',
     'Flask-Testing>=0.4.2',
     'Flask-WTF>=0.11',
-    'bcrypt>=1.1.1'
+    'bcrypt>=1.1.1',
+    'requests==2.7.0'
 ]
 
 tests_require = ['pytest']

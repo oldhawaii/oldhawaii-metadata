@@ -18,7 +18,7 @@
     {% block css %}
         {% block css_shared %}
         <link rel="stylesheet" href="{{ url_for('static', filename='components/bootstrap/dist/css/bootstrap.min.css') }}" />
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
         {% endblock css_shared %}
         {% block css_custom %}{% endblock css_custom %}
     {% endblock css%}
@@ -40,7 +40,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="#">Old Hawaii Metadata</a>
+              <a class="navbar-brand" href="/">Old Hawaii Metadata</a>
             </div>
             <div class="navbar-collapse collapse">
               {% if current_user.is_authenticated() %}
@@ -52,17 +52,6 @@
                   </ul>
                 </li>
               </ul>
-              {% else %}
-              <form action="{{ url_for('users.login') }}" class="navbar-form navbar-right" method="POST">
-                {{ form.csrf_token }}
-                <div class="form-group">
-                  {{ form.email(placeholder="Email", class_="form-control") }}
-                </div>
-                <div class="form-group">
-                  {{ form.password(placeholder="Password", class_="form-control") }}
-                </div>
-                <button type="submit" class="btn btn-success">Sign in</button>
-              </form>
               {% endif %}
             </div><!--/.navbar-collapse -->
           </div>

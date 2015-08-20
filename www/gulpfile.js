@@ -82,8 +82,13 @@ function styles() {
       .pipe(gulp.dest(paths.styles.dst))
 }
 
+function watch_styles() {
+  return gulp.watch(paths.styles.src_files, ['styles']);
+}
+
 gulp.task('build', function(cb) { return compile(); });
 gulp.task('clean', function(cb) { return clean(cb); });
 gulp.task('styles', function(cb) { return styles(); });
 gulp.task('watch', function(cb) { return watch(); });
-gulp.task('default', ['clean', 'watch']);
+gulp.task('watch:styles', function(cb) { return watch_styles(); });
+gulp.task('default', ['clean', 'watch', 'watch:styles']);

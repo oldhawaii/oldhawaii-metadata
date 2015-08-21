@@ -1,0 +1,13 @@
+{% extends 'layouts/base.html' %}
+
+{% block main_content %}
+<p>
+{% if metadata %}
+    {{ metadata._id }}
+    {{ metadata.name }}
+    {{ metadata.description }}
+    {{ metadata.author }}
+    {{ metadata.latitude }}, {{ metadata.longitude}}
+{% endif %}
+</p>
+{% endblock main_content %}

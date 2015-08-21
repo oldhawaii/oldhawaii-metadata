@@ -11,4 +11,12 @@ body {
     width: 800px;
     border:1px solid #eee;
   }
+  .dropzone {
+    width: 100%; 
+    background-color:#fafafa;
+    border:1px solid #003;
+    padding:5em;
+    text-align:center;
+    margin-bottom:1em;
+  }
 }

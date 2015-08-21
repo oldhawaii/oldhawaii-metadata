@@ -17,7 +17,7 @@ metadata_api = Blueprint('api', __name__, url_prefix='/api/metadatas')
 def create():
     client = MetadataApiClient()
     response = client.create(request.data)
-    print response.json()
+    return response.json()
 
 @metadata_api.route('/', methods=['GET'])
 @login_required
@@ -62,7 +62,7 @@ class MetadataApiClient(object):
         return r.json()
 
     def get_by_id(self, id):
-        url = '{0}/{1}'.format(self.endpoint(), id)
+        url = '{0}{1}'.format(self.endpoint(), id)
         r = requests.get(url)
         return r.json()
 

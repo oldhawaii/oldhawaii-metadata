@@ -23,7 +23,7 @@ metadatas = {
 
     'schema': {
         'type': {'type': 'string'},
-        'source_name': {'type': 'string'},
+        'source': {'type': 'objectid'},
         'source_url': {'type': 'string'},
         'title': {'type': 'string'},
         'description': {'type': 'string'},
@@ -39,6 +39,18 @@ metadatas = {
         'audio_length': {'type': 'integer'},
         'latitude': {'type': 'number'},
         'longitude': {'type': 'number'},
+        'created_at': {'type': 'datetime'},
+        'created_by': {'type': 'string'},
+        'updated_at': {'type': 'datetime'},
+        'updated_by': {'type': 'string'}
+    }
+}
+
+sources = {
+    'item_title': 'sources',
+    'schema': {
+        'name': {'type': 'string'},
+        'url': {'type': 'string'},
         'created_at': {'type': 'datetime'},
         'created_by': {'type': 'string'},
         'updated_at': {'type': 'datetime'},

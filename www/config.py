@@ -49,4 +49,8 @@ class DefaultConfig(object):
     MAIL_SUPPRESS_SEND = as_bool('MAIL_USE_SSL', False)
     MAIL_ASCII_ATTACHMENTS = as_bool('MAIL_USE_SSL', False)
 
+    # Flask-Store
+    STORE_DOMAIN = 'http://127.0.0.1:5000'
+    STORE_PATH = '/tmp'
+
 # vim: filetype=python

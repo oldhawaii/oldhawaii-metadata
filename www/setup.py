@@ -61,6 +61,7 @@ requires = [
     'Flask-Mail',
     'Flask-Migrate>=1.4.0',
     'Flask-Script>=2.0.5',
+    'Flask-Store>=0.0.4.1',
     'Flask-SQLAlchemy>=2.0',
     'Flask-Testing>=0.4.2',
     'Flask-WTF>=0.11',

@@ -4,8 +4,10 @@ import * as actions from '../actions';
 import Metadata from '../models/Metadata';
 
 const initialState = {
+  dropzone: null,
+  dropzone_file_url: '',
+  error: null,
   isSubmitting: false,
-  error: false,
   metadata: new Metadata()
 };
 
@@ -19,7 +21,6 @@ export function metadatas(state = initialState, action) {
       });
     case actions.CREATE_METADATA_SUCCESS:
       const metadata = new Metadata();
-      metadata.author = 'FooMan';
       return Object.assign({}, state, {
         isSubmitting: false,
         error: action.error,
@@ -28,6 +29,16 @@ export function metadatas(state = initialState, action) {
     case actions.CREATE_METADATA_FAILURE:
       return Object.assign({}, state, {
         isSubmitting: false,
+        error: action.error
+      });
+    case actions.DROPZONE_LOAD_SUCCESS:
+      return Object.assign({}, state, {
+        dropzone: action.payload,
+        error: action.error
+      });
+    case actions.DROPZONE_UPLOAD_SUCCESS:
+      return Object.assign({}, state, {
+        dropzone_file_url: action.payload,
         error: action.error
       });
     default:

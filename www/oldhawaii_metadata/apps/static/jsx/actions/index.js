@@ -1,10 +1,21 @@
+import request from 'superagent';
+
 export const CREATE_METADATA = 'CREATE_METADATA';
 export const CREATE_METADATA_SUCCESS = 'CREATE_METADATA_SUCCESS';
 export const CREATE_METADATA_FAILURE = 'CREATE_METADATA_FAILURE';
 
 export function create_metadata(metadata) {
   return dispatch => {
-    dispatch(create_metadata_success(metadata));
+    const data = JSON.parse(JSON.stringify(metadata));
+    request.post('/api/metadatas/')
+           .send(data)
+           .end(function (err, res) {
+              if (err) {
+              } else if (res.ok) {
+                dispatch(create_metadata_success(metadata));
+              } else {
+              }
+            });
   };
 }
 

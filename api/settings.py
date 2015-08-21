@@ -30,18 +30,24 @@ metadatas = {
         'author': {'type': 'string'},
         'published_date': {'type': 'datetime'},
         'image_url': {'type': 'string'},
-        'image_width': {'type': 'int'},
-        'image_height': {'type': 'int'},
+        'image_width': {'type': 'integer'},
+        'image_height': {'type': 'integer'},
         'thumbnail_url': {'type': 'string'},
-        'thumbnail_width': {'type': 'int'},
-        'thumbnail_height': {'type': 'int'},
+        'thumbnail_width': {'type': 'integer'},
+        'thumbnail_height': {'type': 'integer'},
         'audio_url': {'type': 'string'},
-        'audio_length': {'type': 'int'},
-        'latitude': {'type': 'string'},
-        'longitude': {'type': 'string'}
+        'audio_length': {'type': 'integer'},
+        'latitude': {'type': 'number'},
+        'longitude': {'type': 'number'},
+        'created_at': {'type': 'datetime'},
+        'created_by': {'type': 'string'},
+        'updated_at': {'type': 'datetime'},
+        'updated_by': {'type': 'string'}
     }
 }
 
 DOMAIN = {
     'metadatas': metadatas
 }
+
+# vim: filetype=python

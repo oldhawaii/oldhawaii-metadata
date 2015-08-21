@@ -17,4 +17,3 @@ app = Eve(template_folder=tmpl_dir, static_folder=static_dir)
 
 if __name__ == '__main__':
     app.run(host=host, port=port)
-

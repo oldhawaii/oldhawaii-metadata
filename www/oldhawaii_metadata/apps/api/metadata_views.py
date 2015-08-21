@@ -2,18 +2,22 @@
 # -*- coding: utf-8 -*-
 
 from flask import Blueprint
+from flask import request
 from flask.ext.login import login_required
+import json
+from oldhawaii_metadata.extensions import csrf
 import requests
 
 
 metadata_api = Blueprint('api', __name__, url_prefix='/api/metadatas')
 
 
+@csrf.exempt
 @metadata_api.route('/', methods=['POST'])
-@login_required
-def create(metadata):
+def create():
     client = MetadataApiClient()
-    return client.create(metadata)
+    response = client.create(request.data)
+    print response.json()
 
 @metadata_api.route('/', methods=['GET'])
 @login_required
@@ -48,7 +52,10 @@ class MetadataApiClient(object):
 
     def create(self, metadata):
         headers = {'Content-Type': 'application/json'}
-        return requests.post(endpoint(), metadata, headers=headers)
+        return requests.post(
+            self.endpoint(),
+            data=metadata,
+            headers=headers)
 
     def get_all(self):
         r = requests.get(self.endpoint())

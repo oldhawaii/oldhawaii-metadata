@@ -1,7 +1,6 @@
 'use strict';
 
 import React from 'react';
-import Metadata from '../models/Metadata';
 import DropzoneComponent from 'react-dropzone-component';
 
 class MetadataForm extends React.Component {
@@ -98,23 +97,34 @@ class MetadataForm extends React.Component {
       )
     };
 
-    let dropzone = '';
+    let dropzone = null;
 
-    if (!this.props.dropzone_file_url) {
+    if (this.props.dropzone_file_stats == null) {
       dropzone = <DropzoneComponent config={componentConfig}
                            djsConfig={djsConfig}
                            eventHandlers={eventHandlers}/>;
     } else {
       // TODO: Needs to also replace form elements
       dropzone = (<div className='form-group'>
-                  <img height='50%' src={this.props.dropzone_file_url}
+                  <img height='50%'
+                       src={this.props.dropzone_file_stats.image_url}
                        width='50%'/>
                   <br/>
                   <label htmlFor='image_url'>Image URL</label>
                   <input className='form-control'
                          name='image_url'
                          readOnly
-                         value={this.props.dropzone_file_url}/>
+                         value={this.props.dropzone_file_stats.image_url}/>
+                  <label htmlFor='image_width'>Image Width</label>
+                  <input className='form-control'
+                         name='image_width'
+                         readOnly
+                         value={this.props.dropzone_file_stats.image_width}/>
+                  <label htmlFor='image_height'>Image Height</label>
+                  <input className='form-control'
+                         name='image_height'
+                         readOnly
+                         value={this.props.dropzone_file_stats.image_height}/>
                   </div>
                  );
     }
@@ -180,20 +190,12 @@ MetadataForm.propTypes = {
   change_metadata_form: React.PropTypes.function,
   create_metadata: React.PropTypes.function,
   dropzone: React.PropTypes.object,
-  dropzone_file_url: React.PropTypes.string,
+  dropzone_file_stats: React.PropTypes.object,
   dropzone_load_success: React.PropTypes.function,
   dropzone_upload_success: React.PropTypes.function,
   error: React.PropTypes.bool,
   isSubmitting: React.PropTypes.bool,
   metadata: React.PropTypes.object
-};
-
-MetadataForm.defaultProps = {
-  dropzone: null,
-  dropzone_file_url: '',
-  error: null,
-  isSubmitting: false,
-  metadata: new Metadata()
 };
 
 export default MetadataForm;

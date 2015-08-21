@@ -56,10 +56,10 @@ export function dropzone_load_success(dropzone) {
 }
 
 export function dropzone_upload_success(file) {
-  const url = (file) ? file.xhr.responseText : '';
+  const file_stats = (file) ? file.xhr.responseText : '';
   return {
     type: DROPZONE_UPLOAD_SUCCESS,
-    payload: url,
+    payload: JSON.parse(file_stats),
     error: false
   };
 }

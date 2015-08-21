@@ -5,8 +5,8 @@ import Metadata from '../models/Metadata';
 
 const initialState = {
   dropzone: null,
-  dropzone_file_url: '',
-  error: null,
+  dropzone_file_stats: null,
+  error: false,
   isSubmitting: false,
   metadata: new Metadata()
 };
@@ -45,7 +45,7 @@ export function metadatas(state = initialState, action) {
       });
     case actions.DROPZONE_UPLOAD_SUCCESS:
       return Object.assign({}, state, {
-        dropzone_file_url: action.payload,
+        dropzone_file_stats: action.payload,
         error: action.error
       });
     default:

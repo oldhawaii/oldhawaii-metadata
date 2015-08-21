@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from flask import Blueprint
+from flask import jsonify
 from flask import render_template
 from flask import request
 from flask.ext.login import login_required
@@ -9,6 +10,7 @@ import json
 from oldhawaii_metadata.apps.api import metadata_views
 from oldhawaii_metadata.extensions import csrf
 from oldhawaii_metadata.extensions import store
+from .utilities import get_image_size_from_url
 
 
 metadatas = Blueprint(
@@ -47,6 +49,9 @@ def edit_metadata(id):
 def upload():
     provider = store.Provider(request.files.get('file'))
     provider.save()
-    return provider.absolute_url
+    width, height = get_image_size_from_url(provider.absolute_url)
+    return jsonify({"image_url": provider.absolute_url,
+                    "image_width": width or '',
+                    "image_height": height or ''})
 
 # vim: filetype=python

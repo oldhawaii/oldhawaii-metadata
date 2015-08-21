@@ -5,10 +5,8 @@ import configureStore from './store';
 import { Provider } from 'react-redux';
 import MetadataFormContainer from './containers/MetadataFormContainer';
 
-
 const store = configureStore();
-
-let mainElement = document.getElementById('main');
+const mainElement = document.getElementById('main');
 
 document.addEventListener('DOMContentLoaded', function () {
   React.render(
@@ -16,5 +14,5 @@ document.addEventListener('DOMContentLoaded', function () {
       {() => <MetadataFormContainer />}
     </Provider>,
     mainElement
-  )
+  );
 });

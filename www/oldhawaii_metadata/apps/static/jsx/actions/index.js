@@ -1,6 +1,3 @@
-import agent from 'superagent';
-import Metadata from '../models/Metadata';
-
 export const CREATE_METADATA = 'CREATE_METADATA';
 export const CREATE_METADATA_SUCCESS = 'CREATE_METADATA_SUCCESS';
 export const CREATE_METADATA_FAILURE = 'CREATE_METADATA_FAILURE';

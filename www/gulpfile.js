@@ -2,32 +2,14 @@
 
 var gulp = require('gulp'),
     autoprefix = require('gulp-autoprefixer'),
-    babel = require('babelify'),
-    browserify = require('browserify'),
-    buffer = require('vinyl-buffer'),
     del = require('del'),
     rename = require('gulp-rename'),
     sass = require('gulp-sass'),
     size = require('gulp-size'),
     sourcemaps = require('gulp-sourcemaps'),
-    source = require('vinyl-source-stream'),
-    watchify = require('watchify');
+    webpack = require('webpack-stream'),
+    paths = require('./build.config');
 
-
-var paths = {
-  js: {
-    src: './oldhawaii_metadata/apps/static/jsx/',
-    src_files: './oldhawaii_metadata/apps/static/jsx/app.js',
-    dst: './oldhawaii_metadata/apps/static/js',
-    dst_filename: 'bundle.js'
-  },
-  styles: {
-    src: './oldhawaii_metadata/apps/static/sass',
-    src_files: './oldhawaii_metadata/apps/static/sass/**/*.scss',
-    dst: './oldhawaii_metadata/apps/static/css',
-    dst_filename: 'style.css'
-  }
-}
 
 function clean(cb) {
   console.log('-> cleaning...');
@@ -35,32 +17,21 @@ function clean(cb) {
 }
 
 function compile(watch) {
-  var bundler = browserify(paths.js.src_files, { cache: {}, packageCache: {}, debug: true }).transform(babel);
-
-  if (watch) {
-    bundler = watchify(bundler);
-  }
 
   function rebundle() {
 
     console.log('-> bundling...');
 
-    bundler.bundle()
-      .on('error', function(err) { console.error(err); this.emit('end'); })
-      .pipe(source(paths.js.src_files))
-      .pipe(buffer())
-      .pipe(sourcemaps.init({ loadMaps: true }))
-      .pipe(sourcemaps.write('./'))
-      .pipe(size())
-      .pipe(rename(paths.js.dst_filename))
-      .pipe(gulp.dest(paths.js.dst));
-  }
+    var config = require('./webpack.config.js');
+    config['watch'] = watch;
 
-  if (watch) {
-    bundler.on('update', function() {
-      clean();
-      rebundle();
-    });
+    gulp.src(paths.js.src_files)
+        .pipe(webpack(config))
+        .on('error', function(err) { console.error(err); this.emit('end'); })
+        .pipe(sourcemaps.init({ loadMaps: true }))
+        .pipe(sourcemaps.write('./'))
+        .pipe(size())
+        .pipe(gulp.dest(paths.js.dst));
   }
 
   rebundle();

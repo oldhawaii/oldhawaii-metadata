@@ -1,7 +1,8 @@
 'use strict';
 
 class Metadata {
-  constructor(type='image', title='', description='', author='', latitude=0, longitude=0) {
+  constructor(type = 'image', title = '',
+              description = '', author = '', latitude = 0, longitude = 0) {
     this.type = type;
     this.title = title;
     this.description = description;

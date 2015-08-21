@@ -9,8 +9,7 @@ const initialState = {
   metadata: new Metadata()
 };
 
-
-export function metadatas(state=initialState, action) {
+export function metadatas(state = initialState, action) {
   switch (action.type) {
     case actions.CREATE_METADATA:
       return Object.assign({}, state, {
@@ -19,8 +18,8 @@ export function metadatas(state=initialState, action) {
         metadata: action.payload
       });
     case actions.CREATE_METADATA_SUCCESS:
-      let metadata = new Metadata();
-      metadata.author = "FooMan";
+      const metadata = new Metadata();
+      metadata.author = 'FooMan';
       return Object.assign({}, state, {
         isSubmitting: false,
         error: action.error,

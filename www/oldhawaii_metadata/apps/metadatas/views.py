@@ -20,7 +20,7 @@ def index():
     metadatas = metadata_views.get_all()
     return render_template('metadatas/index.html', metadatas=metadatas)
 
-@metadatas.route('/')
+@metadatas.route('/add')
 @login_required
 def add_metadata():
     return render_template('metadatas/add_metadata.html')

@@ -66,6 +66,7 @@ requires = [
     'Flask-Testing>=0.4.2',
     'Flask-WTF>=0.11',
     'bcrypt>=1.1.1',
+    'gunicorn==19.3.0',
     'requests==2.7.0'
 ]
 

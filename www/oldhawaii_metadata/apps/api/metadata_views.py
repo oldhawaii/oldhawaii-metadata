@@ -18,13 +18,16 @@ metadata_api = Blueprint('api', __name__, url_prefix='/api/metadatas')
 def create():
     client = MetadataApiClient()
     response = client.create(request.data)
-    return jsonify(**request.json)
+    if response.status_code == 201:
+        return jsonify(**request.json)
+    else:
+        return response.text, response.status_code
 
 @metadata_api.route('/', methods=['GET'])
 @login_required
 def get_all():
     client = MetadataApiClient()
-    return client.get_all()
+    return client.get_all(request.query_string)
 
 @metadata_api.route('/<int:id>', methods=['GET'])
 @login_required
@@ -58,8 +61,9 @@ class MetadataApiClient(object):
             data=metadata,
             headers=headers)
 
-    def get_all(self):
-        r = requests.get(self.endpoint())
+    def get_all(self, pagination_and_filters=None):
+        url = "{0}?{1}".format(self.endpoint(), pagination_and_filters or '')
+        r = requests.get(url)
         return r.json()
 
     def get_by_id(self, id):

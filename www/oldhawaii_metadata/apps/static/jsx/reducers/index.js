@@ -13,6 +13,14 @@ const initialState = {
 
 export function metadatas(state = initialState, action) {
   switch (action.type) {
+    case actions.CHANGE_METADATA_FORM:
+      const new_metadata_state = new Metadata();
+      Object.assign(new_metadata_state, state.metadata);
+      new_metadata_state[action.payload.key] = action.payload.value;
+      return Object.assign({}, state, {
+        error: action.error,
+        metadata: new_metadata_state
+      });
     case actions.CREATE_METADATA:
       return Object.assign({}, state, {
         isSubmitting: true,
@@ -20,11 +28,10 @@ export function metadatas(state = initialState, action) {
         metadata: action.payload
       });
     case actions.CREATE_METADATA_SUCCESS:
-      const metadata = new Metadata();
       return Object.assign({}, state, {
         isSubmitting: false,
         error: action.error,
-        metadata: metadata
+        metadata: new Metadata()
       });
     case actions.CREATE_METADATA_FAILURE:
       return Object.assign({}, state, {

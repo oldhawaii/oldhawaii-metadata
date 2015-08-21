@@ -1,10 +1,19 @@
 import request from 'superagent';
 
+export const CHANGE_METADATA_FORM = 'CHANGE_METADATA_FORM';
 export const CREATE_METADATA = 'CREATE_METADATA';
 export const CREATE_METADATA_SUCCESS = 'CREATE_METADATA_SUCCESS';
 export const CREATE_METADATA_FAILURE = 'CREATE_METADATA_FAILURE';
 export const DROPZONE_LOAD_SUCCESS = 'DROPZONE_LOAD_SUCCESS';
 export const DROPZONE_UPLOAD_SUCCESS = 'DROPZONE_UPLOAD_SUCCESS';
+
+export function change_metadata_form(key, value) {
+  return {
+    type: CHANGE_METADATA_FORM,
+    payload: {key: key, value: value},
+    error: false
+  };
+}
 
 export function create_metadata(metadata) {
   return dispatch => {

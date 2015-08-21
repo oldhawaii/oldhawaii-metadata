@@ -10,13 +10,6 @@ class MetadataForm extends React.Component {
     super(props);
     this.submit = this.submit.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.state = {
-      'isSubmitting': props.isSubmitting,
-      'metadata': props.metadata,
-      'error': props.error,
-      'dropzone': props.dropzone,
-      'dropzone_file_url': props.dropzone_file_url
-    };
   }
 
   displayName() {
@@ -25,36 +18,13 @@ class MetadataForm extends React.Component {
 
   handleChange(key) {
     return function (e) {
-      const key_split = key.split('.');
-      const changedState = {...this.state};
-      changedState[key_split[0]][key_split[1]] = e.target.value;
-      this.setState(changedState);
+      this.props.change_metadata_form(key, e.target.value);
     }.bind(this);
-  }
-
-  // TODO: This is not ideal. Was only temporary and I forgot to fix.
-  // Will refactor out.
-  componentWillReceiveProps(nextProps) {
-    const changedState = {...this.state};
-    changedState.metadata = nextProps.metadata;
-    changedState.isSubmitting = nextProps.isSubmitting;
-    changedState.error = nextProps.error;
-    changedState.dropzone = nextProps.dropzone;
-    changedState.dropzone_file_url = nextProps.dropzone_file_url;
-    this.setState(changedState);
   }
 
   submit(event) {
     event.preventDefault();
-    const metadata = new Metadata(
-        'image',
-        this.state.metadata.title,
-        this.state.metadata.description,
-        this.state.metadata.author,
-        this.state.metadata.latitude,
-        this.state.metadata.longitude);
-
-    this.props.create_metadata(metadata);
+    this.props.create_metadata(this.props.metadata);
   }
 
   // Should break into tiny components, but I'm lazy.
@@ -129,12 +99,13 @@ class MetadataForm extends React.Component {
     };
 
     let dropzone = '';
-    if (!this.state.dropzone_file_url) {
+
+    if (!this.props.dropzone_file_url) {
       dropzone = <DropzoneComponent config={componentConfig}
                            djsConfig={djsConfig}
                            eventHandlers={eventHandlers}/>;
     } else {
-      dropzone = <img height='50%' src={this.state.dropzone_file_url}
+      dropzone = <img height='50%' src={this.props.dropzone_file_url}
                       width='50%'/>;
     }
 
@@ -145,48 +116,48 @@ class MetadataForm extends React.Component {
           <label htmlFor='name'>Title</label>
           <input className='form-control'
                  id='title'
-                 onChange={this.handleChange('metadata.title')}
+                 onChange={this.handleChange('title')}
                  placeholder='Title'
                  type='text'
-                 value={this.state.metadata.title}></input>
+                 value={this.props.metadata.title}></input>
         </div>
         <div className='form-group'>
           <label htmlFor='description'>Description</label>
           <textarea className='form-control'
                     id='description'
-                    onChange={this.handleChange('metadata.description')}
+                    onChange={this.handleChange('description')}
                     placeholder='Enter a description'
-                    value={this.state.metadata.description}></textarea>
+                    value={this.props.metadata.description}></textarea>
         </div>
         <div className='form-group'>
           <label htmlFor='author'>Author</label>
           <input className='form-control'
                  id='author'
-                 onChange={this.handleChange('metadata.author')}
+                 onChange={this.handleChange('author')}
                  placeholder='Author'
                  type='text'
-                 value={this.state.metadata.author}></input>
+                 value={this.props.metadata.author}></input>
         </div>
         <div className='form-group'>
           <label htmlFor='latitude'>Latitude</label>
           <input className='form-control'
                  id='latitude'
-                 onChange={this.handleChange('metadata.latitude')}
+                 onChange={this.handleChange('latitude')}
                  placeholder='Latitude'
                  type='text'
-                 value={this.state.metadata.latitude}></input>
+                 value={this.props.metadata.latitude}></input>
         </div>
         <div className='form-group'>
           <label htmlFor='author'>Longitude</label>
           <input className='form-control'
                  id='longitude'
-                 onChange={this.handleChange('metadata.longitude')}
+                 onChange={this.handleChange('longitude')}
                  placeholder='Longitude'
                  type='text'
-                 value={this.state.metadata.longitude}></input>
+                 value={this.props.metadata.longitude}></input>
         </div>
         <button className='btn btn-default'
-                disabled={this.state.isSubmitting}
+                disabled={this.props.isSubmitting}
                 type='submit'>Save!</button>
       </form>
     );
@@ -194,6 +165,7 @@ class MetadataForm extends React.Component {
 };
 
 MetadataForm.propTypes = {
+  change_metadata_form: React.PropTypes.function,
   create_metadata: React.PropTypes.function,
   dropzone: React.PropTypes.object,
   dropzone_file_url: React.PropTypes.string,

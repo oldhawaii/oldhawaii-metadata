@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from flask import Blueprint
+from flask import jsonify
 from flask import request
 from flask.ext.login import login_required
 import json
@@ -17,7 +18,7 @@ metadata_api = Blueprint('api', __name__, url_prefix='/api/metadatas')
 def create():
     client = MetadataApiClient()
     response = client.create(request.data)
-    return response.json()
+    return jsonify(**request.json)
 
 @metadata_api.route('/', methods=['GET'])
 @login_required

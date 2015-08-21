@@ -16,8 +16,11 @@ metadata_api = Blueprint('api', __name__, url_prefix='/api/metadatas')
 @csrf.exempt
 @metadata_api.route('/', methods=['POST'])
 def create():
+    json_data = json.loads(request.data)
+    json_data['latitude'] = float(json_data['latitude'])
+    json_data['longitude'] = float(json_data['longitude'])
     client = MetadataApiClient()
-    response = client.create(request.data)
+    response = client.create(json_data)
     if response.status_code == 201:
         return jsonify(**request.json)
     else:
@@ -58,7 +61,7 @@ class MetadataApiClient(object):
         headers = {'Content-Type': 'application/json'}
         return requests.post(
             self.endpoint(),
-            data=metadata,
+            data=json.dumps(metadata),
             headers=headers)
 
     def get_all(self, pagination_and_filters=None):

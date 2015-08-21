@@ -31,7 +31,9 @@ export function metadatas(state = initialState, action) {
       return Object.assign({}, state, {
         isSubmitting: false,
         error: action.error,
-        metadata: new Metadata()
+        metadata: new Metadata(),
+        dropzone: null,
+        dropzone_file_stats: null
       });
     case actions.CREATE_METADATA_FAILURE:
       return Object.assign({}, state, {

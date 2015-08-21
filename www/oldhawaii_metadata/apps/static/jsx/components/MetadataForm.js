@@ -105,6 +105,7 @@ class MetadataForm extends React.Component {
                            djsConfig={djsConfig}
                            eventHandlers={eventHandlers}/>;
     } else {
+      // TODO: Needs to also replace form elements
       dropzone = <img height='50%' src={this.props.dropzone_file_url}
                       width='50%'/>;
     }

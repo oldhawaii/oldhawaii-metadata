@@ -1,12 +1,21 @@
 {% extends 'layouts/base.html' %}
 
 {% block main_content %}
+<ul class="breadcrumb">  
+  <li>  
+    <a href="#">Home</a>
+  </li>  
+  <li class="active">  
+    All Photos
+  </li>  
+</ul>  
+
 <div class="table-responsive">
     <table class="table table-striped">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Name</th>
+                <th>Title</th>
                 <th>Description</th>
                 <th>Author</th>
                 <th>Lat/Long</th>
@@ -17,7 +26,7 @@
                 {% for metadata in metadatas %}
                 <tr>
                     <td><a href="{{ url_for('metadatas.view_metadata', id=metadata._id) }}">{{ metadata._id }}</td>
-                    <td>{{ metadata.name }}</td>
+                    <td>{{ metadata.title }}</td>
                     <td>{{ metadata.description }}</td>
                     <td>{{ metadata.author }}</td>
                     <td>{{ metadata.latitude }}, {{ metadata.longitude}}</td>

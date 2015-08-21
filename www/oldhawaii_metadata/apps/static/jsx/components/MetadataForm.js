@@ -106,8 +106,17 @@ class MetadataForm extends React.Component {
                            eventHandlers={eventHandlers}/>;
     } else {
       // TODO: Needs to also replace form elements
-      dropzone = <img height='50%' src={this.props.dropzone_file_url}
-                      width='50%'/>;
+      dropzone = (<div className='form-group'>
+                  <img height='50%' src={this.props.dropzone_file_url}
+                       width='50%'/>
+                  <br/>
+                  <label htmlFor='image_url'>Image URL</label>
+                  <input className='form-control'
+                         name='image_url'
+                         readOnly
+                         value={this.props.dropzone_file_url}/>
+                  </div>
+                 );
     }
 
     return (
@@ -145,7 +154,8 @@ class MetadataForm extends React.Component {
                  id='latitude'
                  onChange={this.handleChange('latitude')}
                  placeholder='Latitude'
-                 type='text'
+                 step='any'
+                 type='number'
                  value={this.props.metadata.latitude}></input>
         </div>
         <div className='form-group'>
@@ -154,7 +164,8 @@ class MetadataForm extends React.Component {
                  id='longitude'
                  onChange={this.handleChange('longitude')}
                  placeholder='Longitude'
-                 type='text'
+                 step='any'
+                 type='number'
                  value={this.props.metadata.longitude}></input>
         </div>
         <button className='btn btn-default'

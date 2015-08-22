@@ -2,7 +2,7 @@
 
 import React from 'react';
 import DropzoneComponent from 'react-dropzone-component';
-import LatLonMap from './LatLonMap';
+import LatLngMap from './LatLngMap';
 
 class DigitalAssetForm extends React.Component {
 
@@ -24,8 +24,7 @@ class DigitalAssetForm extends React.Component {
   }
 
   handleLocationSelected(lat, lng) {
-    console.log('LAT:' + lat);
-    console.log('LNG:' + lng);
+    this.props.change_digital_asset_form_from_map(lat, lng);
   }
 
   submit(event) {
@@ -170,8 +169,8 @@ class DigitalAssetForm extends React.Component {
                  value={this.props.digital_asset.author}></input>
         </div>
 
-        <LatLonMap lat={this.props.digital_asset.latitude}
-                   lon={this.props.digital_asset.longitude}
+        <LatLngMap lat={this.props.digital_asset.latitude}
+                   lng={this.props.digital_asset.longitude}
                    onLocationSelected={this.handleLocationSelected} />
 
         <div className='form-group'>
@@ -179,8 +178,8 @@ class DigitalAssetForm extends React.Component {
           <input className='form-control'
                  id='latitude'
                  name='latitude'
-                 onChange={this.handleChange('latitude')}
                  placeholder='Latitude'
+                 readOnly
                  step='any'
                  type='number'
                  value={this.props.digital_asset.latitude}></input>
@@ -190,8 +189,9 @@ class DigitalAssetForm extends React.Component {
           <input className='form-control'
                  id='longitude'
                  name='longitude'
-                 onChange={this.handleChange('longitude')}
                  placeholder='Longitude'
+                 readOnly
+
                  step='any'
                  type='number'
                  value={this.props.digital_asset.longitude}></input>
@@ -206,6 +206,7 @@ class DigitalAssetForm extends React.Component {
 
 DigitalAssetForm.propTypes = {
   change_digital_asset_form: React.PropTypes.function,
+  change_digital_asset_form_from_map: React.PropTypes.function,
   create_digital_asset: React.PropTypes.function,
   digital_asset: React.PropTypes.object,
   dropzone: React.PropTypes.object,

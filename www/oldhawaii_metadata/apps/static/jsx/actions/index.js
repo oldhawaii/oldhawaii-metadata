@@ -1,6 +1,8 @@
 import request from 'superagent';
 
 export const CHANGE_DIGITAL_ASSET_FORM = 'CHANGE_DIGITAL_ASSET_FORM';
+export const CHANGE_DIGITAL_ASSET_FORM_FROM_MAP =
+  'CHANGE_DIGITAL_ASSET_FORM_FROM_MAP';
 export const CREATE_DIGITAL_ASSET = 'CREATE_DIGITAL_ASSET';
 export const CREATE_DIGITAL_ASSET_SUCCESS = 'CREATE_DIGITAL_ASSET_SUCCESS';
 export const CREATE_DIGITAL_ASSET_FAILURE = 'CREATE_DIGITAL_ASSET_FAILURE';
@@ -27,6 +29,14 @@ export function change_digital_asset_form(key, value) {
   return {
     type: CHANGE_DIGITAL_ASSET_FORM,
     payload: {key: key, value: value},
+    error: false
+  };
+}
+
+export function change_digital_asset_form_from_map(lat, lng) {
+  return {
+    type: CHANGE_DIGITAL_ASSET_FORM_FROM_MAP,
+    payload: {lat: lat, lng: lng},
     error: false
   };
 }

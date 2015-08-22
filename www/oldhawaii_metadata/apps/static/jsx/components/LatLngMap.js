@@ -1,7 +1,7 @@
 import React from 'react';
 import GoogleMapsLoader from 'google-maps';
 
-class LatLonMap extends React.Component {
+class LatLngMap extends React.Component {
 
   constructor(props) {
     super(props);
@@ -10,15 +10,20 @@ class LatLonMap extends React.Component {
       map: null,
       marker: null,
       lat: this.props.lat,
-      lon: this.props.lon
+      lng: this.props.lng
     };
   }
 
   displayName() {
-    return 'LatLongMap';
+    return 'LatLngMap';
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return false;
   }
 
   componentDidMount() {
+    const component = this;
     GoogleMapsLoader.load(function (google) {
       const mapOptions = {
         minZoom: 12,
@@ -26,16 +31,15 @@ class LatLonMap extends React.Component {
         center: new google.maps.LatLng(21.3114, -157.7964)
       };
 
-      const map = new google.maps.Map(this.refs.map_canvas.getDOMNode(),
+      const map = new google.maps.Map(component.refs.map_canvas.getDOMNode(),
                                       mapOptions);
 
       google.maps.event.addListener(map, 'click', function (event) {
-        this.placeMarker(google, map, event.latLng);
-      }.bind(this)).bind(this);
+        component.placeMarker(google, map, event.latLng);
+      });
 
-      this.setState({map: map});
-
-    }.bind(this)).bind(this);
+      component.setState({map: map});
+    });
   }
 
   placeMarker(google, map, position) {
@@ -72,10 +76,10 @@ class LatLonMap extends React.Component {
   }
 }
 
-LatLonMap.propTypes = {
+LatLngMap.propTypes = {
   lat: React.PropTypes.float,
-  lon: React.PropTypes.float,
+  lng: React.PropTypes.float,
   onLocationSelected: React.PropTypes.function
 };
 
-export default LatLonMap;
+export default LatLngMap;

@@ -22,6 +22,15 @@ export function digital_assets(state = initialDigitalAssetState, action) {
         error: action.error,
         digital_asset: new_da
       });
+    case actions.CHANGE_DIGITAL_ASSET_FORM_FROM_MAP:
+      const new_da_map = new DigitalAsset();
+      Object.assign(new_da_map, state.digital_asset);
+      new_da_map['latitude'] = action.payload.lat;
+      new_da_map['longitude'] = action.payload.lng;
+      return Object.assign({}, state, {
+        error: action.error,
+        digital_asset: new_da_map
+      });
     case actions.CREATE_DIGITAL_ASSET:
       return Object.assign({}, state, {
         isSubmitting: true,

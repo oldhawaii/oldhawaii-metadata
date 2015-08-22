@@ -11,31 +11,31 @@
 </ul>  
 
 <div class="table-responsive">
-    <table class="table table-striped">
-        <thead>
+  <table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Author</th>
+            <th>Lat, Long</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% if metadatas %}
+            {% for metadata in metadatas %}
             <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Author</th>
-                <th>Lat, Long</th>
+                <td><a href="{{ url_for('metadatas.view_metadata', id=metadata._id) }}">{{ metadata._id }}</td>
+                <td>{{ metadata.title }}</td>
+                <td>{{ metadata.description }}</td>
+                <td>{{ metadata.author }}</td>
+                <td>{{ metadata.latitude }}, {{ metadata.longitude}}</td>
             </tr>
-        </thead>
-        <tbody>
-            {% if metadatas %}
-                {% for metadata in metadatas %}
-                <tr>
-                    <td><a href="{{ url_for('metadatas.view_metadata', id=metadata._id) }}">{{ metadata._id }}</td>
-                    <td>{{ metadata.title }}</td>
-                    <td>{{ metadata.description }}</td>
-                    <td>{{ metadata.author }}</td>
-                    <td>{{ metadata.latitude }}, {{ metadata.longitude}}</td>
-                </tr>
-                {% endfor %}
-            {% endif %}
-        </tbody>
-        <tfoot>
-        </tfoot>
-    </table>
+            {% endfor %}
+        {% endif %}
+    </tbody>
+    <tfoot>
+    </tfoot>
+  </table>
 </div>
 {% endblock main_content %}

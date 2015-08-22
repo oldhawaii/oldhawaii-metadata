@@ -99,6 +99,7 @@ class MetadataForm extends React.Component {
 
     let dropzone = null;
 
+    // TODO Not sure this is a good check
     if (this.props.dropzone_file_stats == null) {
       dropzone = <DropzoneComponent config={componentConfig}
                            djsConfig={djsConfig}
@@ -114,17 +115,17 @@ class MetadataForm extends React.Component {
                   <input className='form-control'
                          name='image_url'
                          readOnly
-                         value={this.props.dropzone_file_stats.image_url}/>
+                         value={this.props.metadata.image_url}/>
                   <label htmlFor='image_width'>Image Width</label>
                   <input className='form-control'
                          name='image_width'
                          readOnly
-                         value={this.props.dropzone_file_stats.image_width}/>
+                         value={this.props.metadata.image_width}/>
                   <label htmlFor='image_height'>Image Height</label>
                   <input className='form-control'
                          name='image_height'
                          readOnly
-                         value={this.props.dropzone_file_stats.image_height}/>
+                         value={this.props.metadata.image_height}/>
                   </div>
                  );
     }

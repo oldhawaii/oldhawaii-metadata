@@ -46,8 +46,14 @@ export function metadatas(state = initialState, action) {
         error: action.error
       });
     case actions.DROPZONE_UPLOAD_SUCCESS:
+      const new_with_image = new Metadata();
+      Object.assign(new_with_image, state.metadata);
+      new_with_image['image_url'] = action.payload.image_url;
+      new_with_image['image_width'] = action.payload.image_width;
+      new_with_image['image_height'] = action.payload.image_height;
       return Object.assign({}, state, {
         dropzone_file_stats: action.payload,
+        metadata: new_with_image,
         error: action.error
       });
     default:

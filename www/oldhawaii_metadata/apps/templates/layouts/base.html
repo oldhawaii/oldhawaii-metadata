@@ -45,7 +45,8 @@
             <div class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
                 <li><a href="{{ url_for('metadatas.index')}}">All Photos</a></li>
-                <li><a href="{{ url_for('metadatas.add_metadata')}}">Add a Photo</a></li>
+                <li><a href="{{ url_for('metadatas.add_metadata')}}">Link a Photo</a></li>
+                <li><a href="{{ url_for('metadatas.add_metadata')}}">Upload a Photo</a></li>
               </ul>
               {% if current_user.is_authenticated() %}
               <ul class="nav navbar-nav navbar-right">

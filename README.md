@@ -1,20 +1,34 @@
 # oldhawaii-metadata
 
-Tool for collecting Old Hawaii metadata using React/Redux.
+Tool for collecting metadata surrounding [Old Hawaii](http://oldhawaii.org) digital assets.
 
 This project is split up into two components:
 
   * API server
-  * WWW front-end
+  * WWW front end
 
 ## API server
 
-The API server is a [Python-Eve](http://python-eve.org/) implementation.
+The API server uses the [Python-Eve](http://python-eve.org/) framework.
 
-## WWW
+### Installation
+
+`cd api`
+`mkvirtualenv --no-site-packages oldhawaii-metadata-api`
+`pip install -r requirements.txt`
+`python server.py`
+
+## WWW front end
 
 The WWW server is a [Flask](http://flask.pocoo.org/) implementation with a
 [Redux](https://github.com/rackt/redux) front-end.
+
+### Installation
+
+`cd www`
+`mkvirtualenv --no-site-packages oldhawaii-metadata-www`
+`pip install -r requirements.txt`
+`python manage.py gunicorn`
 
 ## TODO
 
@@ -28,4 +42,9 @@ The WWW server is a [Flask](http://flask.pocoo.org/) implementation with a
   * Need to add read source organization
   * Need to add update source organization
   * Need to add delete source organization
+  * Need to add Flask-Sentinel to API server
   * Need to add jest test cases for all routes
+
+## License
+
+OldHawaii-Metadata is licensed under the MIT License.

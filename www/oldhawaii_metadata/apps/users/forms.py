@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 from flask import redirect
-from flask import request
 from flask import url_for
 from flask.ext.wtf import Form
 from sqlalchemy.orm.exc import MultipleResultsFound
@@ -12,6 +11,7 @@ from wtforms import validators
 
 from .models import User
 from .utilities import get_redirect
+from .utilities import is_safe_redirect_url
 
 
 class RedirectForm(Form):
@@ -27,7 +27,6 @@ class RedirectForm(Form):
             return redirect(self.next.data)
         redirect_url = get_redirect()
         return redirect(redirect_url or url_for(endpoint, **values))
-
 
 
 class LoginForm(RedirectForm):

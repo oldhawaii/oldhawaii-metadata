@@ -1,0 +1,35 @@
+{% extends 'layouts/base.html' %}
+
+{% block main_content %}
+<ul class="breadcrumb">
+  <li>
+    <a href="/">Home</a>
+  </li>
+  <li class="active">
+    View All
+  </li>
+</ul>
+
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% if sources %}
+            {% for source in sources %}
+            <tr>
+                <td><a href="{{ url_for('sources.view_source', id=source._id) }}">{{ source._id }}</td>
+                <td>{{ source.name }}</td>
+            </tr>
+            {% endfor %}
+        {% endif %}
+    </tbody>
+    <tfoot>
+    </tfoot>
+  </table>
+</div>
+{% endblock main_content %}

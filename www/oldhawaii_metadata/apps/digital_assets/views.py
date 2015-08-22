@@ -6,7 +6,6 @@ from flask import jsonify
 from flask import render_template
 from flask import request
 from flask.ext.login import login_required
-import json
 from oldhawaii_metadata.apps.api import digital_assets_views
 from oldhawaii_metadata.extensions import csrf
 from oldhawaii_metadata.extensions import store
@@ -48,10 +47,12 @@ def view_digital_asset(id):
     return render_template('digital_assets/view_digital_asset.html',
                            digital_asset=dig_asset)
 
+
 @digital_assets.route('/<string:id>/edit', methods=['GET', 'POST'])
 @login_required
 def edit_digital_asset(id):
     return render_template('digital_assets/edit_digital_asset.html')
+
 
 @csrf.exempt
 @digital_assets.route('/upload/content', methods=['POST'])

@@ -4,7 +4,9 @@
 import os
 from os import environ as env
 from oldhawaii_metadata.apps.api import digital_assets_api
+from oldhawaii_metadata.apps.api import sources_api
 from oldhawaii_metadata.apps.digital_assets import digital_assets
+from oldhawaii_metadata.apps.sources import sources
 from oldhawaii_metadata.apps.www import www
 from oldhawaii_metadata.apps.users import users
 
@@ -29,7 +31,9 @@ class DefaultConfig(object):
     STATIC_DIR = os.path.join(PROJECT_ROOT, 'oldhawaii_metadata', 'apps', 'static')
     TEMPLATE_DIR = os.path.join(PROJECT_ROOT, 'oldhawaii_metadata', 'apps', 'templates')
 
-    BLUEPRINTS = (digital_assets, digital_assets_api, www, users)
+    BLUEPRINTS = (digital_assets, digital_assets_api,
+                  sources, sources_api,
+                  www, users)
 
     LOG_INI = 'etc/logging.ini.json'
 

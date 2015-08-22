@@ -7,11 +7,11 @@ from .extensions import mail
 
 
 def send_mail(
-    subject,
-    sender,
-    recipients,
-    template,
-    **context):
+        subject,
+        sender,
+        recipients,
+        template,
+        **context):
 
     if type(recipients) is not list:
         recipients = [recipients]

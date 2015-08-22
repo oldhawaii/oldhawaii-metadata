@@ -34,7 +34,7 @@ def get_image_size(image_fhandle):
                 size = struct.unpack('>H', image_fhandle.read(2))[0] - 2
             image_fhandle.seek(1, 1)
             width, height = struct.unpack('>HH', image_fhandle.read(4))
-        except Exception as e:
+        except Exception:
             return None, None
     else:
         return None, None
@@ -48,7 +48,7 @@ def get_image_size_from_url(url):
         f.write(response.content)
         f.seek(0)
         width, height = get_image_size(f)
-    except Exception as e:
+    except Exception:
         width, height = None, None
     finally:
         f.close()

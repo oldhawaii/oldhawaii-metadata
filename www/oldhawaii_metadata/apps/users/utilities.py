@@ -6,6 +6,7 @@ try:
 except ImportError:  # pragma: no cover
     from urllib.parse import urlsplit
 
+from flask import current_app
 from flask import request
 from itsdangerous import URLSafeTimedSerializer
 
@@ -20,7 +21,7 @@ def is_safe_redirect_url(redirect_url):
     redirect_url = urlsplit(redirect_url)
 
     return redirect_url.scheme in ('http', 'https') and \
-           host_url.netloc == redirect_url.netloc
+        host_url.netloc == redirect_url.netloc
 
 
 def get_redirect(explicit_redirect=None):

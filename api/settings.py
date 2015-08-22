@@ -48,8 +48,8 @@ digital_assets = {
     }
 }
 
-source_organizations = {
-    'item_title': 'source_organizations',
+sources = {
+    'item_title': 'sources',
     'schema': {
         'name': {'type': 'string'},
         'url': {'type': 'string'},
@@ -64,7 +64,7 @@ source_organizations = {
 
 DOMAIN = {
     'digital_assets': digital_assets,
-    'source_organizations': source_organizations
+    'sources': sources
 }
 
 # vim: filetype=python

@@ -134,9 +134,10 @@ class DigitalAssetForm extends React.Component {
       <form onSubmit={this.submit} role='form'>
         {dropzone}
         <div className='form-group'>
-          <label htmlFor='name'>Title</label>
+          <label htmlFor='title'>Title</label>
           <input className='form-control'
                  id='title'
+                 name='title'
                  onChange={this.handleChange('title')}
                  placeholder='Title'
                  type='text'
@@ -146,6 +147,7 @@ class DigitalAssetForm extends React.Component {
           <label htmlFor='description'>Description</label>
           <textarea className='form-control'
                     id='description'
+                    name='description'
                     onChange={this.handleChange('description')}
                     placeholder='Enter a description'
                     value={this.props.digital_asset.description}></textarea>
@@ -154,6 +156,7 @@ class DigitalAssetForm extends React.Component {
           <label htmlFor='author'>Author</label>
           <input className='form-control'
                  id='author'
+                 name='author'
                  onChange={this.handleChange('author')}
                  placeholder='Author'
                  type='text'
@@ -163,6 +166,7 @@ class DigitalAssetForm extends React.Component {
           <label htmlFor='latitude'>Latitude</label>
           <input className='form-control'
                  id='latitude'
+                 name='latitude'
                  onChange={this.handleChange('latitude')}
                  placeholder='Latitude'
                  step='any'
@@ -170,9 +174,10 @@ class DigitalAssetForm extends React.Component {
                  value={this.props.digital_asset.latitude}></input>
         </div>
         <div className='form-group'>
-          <label htmlFor='author'>Longitude</label>
+          <label htmlFor='longitude'>Longitude</label>
           <input className='form-control'
                  id='longitude'
+                 name='longitude'
                  onChange={this.handleChange('longitude')}
                  placeholder='Longitude'
                  step='any'

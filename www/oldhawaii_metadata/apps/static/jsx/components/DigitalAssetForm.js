@@ -2,6 +2,7 @@
 
 import React from 'react';
 import DropzoneComponent from 'react-dropzone-component';
+import LatLongMap from './LatLongMap';
 
 class DigitalAssetForm extends React.Component {
 
@@ -162,6 +163,7 @@ class DigitalAssetForm extends React.Component {
                  type='text'
                  value={this.props.digital_asset.author}></input>
         </div>
+        <LatLongMap />
         <div className='form-group'>
           <label htmlFor='latitude'>Latitude</label>
           <input className='form-control'

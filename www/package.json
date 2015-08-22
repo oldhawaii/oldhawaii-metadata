@@ -6,10 +6,12 @@
   "license": "MIT",
   "main": "gulpfile.js",
   "dependencies": {
+    "google-maps": "^3.1.0",
     "immutable": "^3.7.4",
+    "react-gmaps": "^0.3.1",
     "react": "^0.13.3",
     "reactify": "^1.1.1",
-    "react-dropzone-component": "^4.0.1",
+    "react-dropzone-component": "^0.5.0",
     "react-redux": "^0.9.0",
     "redux": "^1.0.1",
     "redux-logger": "^0.0.3",

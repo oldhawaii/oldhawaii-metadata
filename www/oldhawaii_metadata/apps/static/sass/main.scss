@@ -20,11 +20,14 @@ body {
     margin-bottom:1em;
   }
 
-  #main {
+  #digital_asset_form {
     form {
       img {
         border:1px solid #ccc;   
         margin-bottom:1em;
+      }
+      #map_canvas {
+        height:300px; 
       }
     } 
   }

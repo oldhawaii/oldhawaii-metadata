@@ -21,7 +21,7 @@ def create():
     json_data = json.loads(request.data)
     client = ResourceApiClient(BASE_API_URL, 'sources')
     id = client.create(json_data)
-    return jsonify(id)
+    return jsonify({id: id})
 
 
 @sources_api.route('/', methods=['GET'])

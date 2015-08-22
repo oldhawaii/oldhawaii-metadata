@@ -42,7 +42,10 @@ The WWW server is a [Flask](http://flask.pocoo.org/) implementation with a
   * Need to add read source organization
   * Need to add update source organization
   * Need to add delete source organization
+  * Need to add auto-complete for source organization
   * Need to add Flask-Sentinel to API server
+  * Need to add script to backup mongo somewhere
+  * Need to add code to shut off middleware logging
   * Need to add jest test cases for all routes
 
 ## License

@@ -25,7 +25,6 @@ metadatas = {
     'schema': {
         'type': {'type': 'string'},
         'source': {'type': 'objectid'},
-        'source_url': {'type': 'string'},
         'title': {'type': 'string'},
         'description': {'type': 'string'},
         'author': {'type': 'string'},

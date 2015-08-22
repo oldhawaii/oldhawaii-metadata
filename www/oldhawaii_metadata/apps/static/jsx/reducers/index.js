@@ -82,7 +82,7 @@ export function sources(state = initialSourceState, action) {
           action.payload.email,
           action.payload.phone_number
         );
-      load_s.id = action.payload._id;
+      load_s._id = action.payload._id;
       return Object.assign({}, state, {
         isSubmitting: false,
         error: action.error,

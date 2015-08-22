@@ -2,8 +2,9 @@
 
 import * as actions from '../actions';
 import DigitalAsset from '../models/DigitalAsset';
+import Source from '../models/Source';
 
-const initialState = {
+const initialDigitalAssetState = {
   dropzone: null,
   dropzone_file_stats: null,
   error: false,
@@ -11,7 +12,7 @@ const initialState = {
   digital_asset: new DigitalAsset()
 };
 
-export function digital_assets(state = initialState, action) {
+export function digital_assets(state = initialDigitalAssetState, action) {
   switch (action.type) {
     case actions.CHANGE_DIGITAL_ASSET_FORM:
       const new_da = new DigitalAsset();
@@ -54,6 +55,44 @@ export function digital_assets(state = initialState, action) {
       return Object.assign({}, state, {
         dropzone_file_stats: action.payload,
         digital_asset: new_with_image,
+        error: action.error
+      });
+    default:
+      return state;
+  }
+}
+
+const initialSourceState = {
+  error: false,
+  isSubmitting: false,
+  source: new Source()
+};
+
+export function sources(state = initialSourceState, action) {
+  switch (action.type) {
+    case actions.CHANGE_SOURCE_FORM:
+      const new_s = new Source();
+      Object.assign(new_s, state.source);
+      new_s[action.payload.key] = action.payload.value;
+      return Object.assign({}, state, {
+        error: action.error,
+        source: new_s
+      });
+    case actions.CREATE_SOURCE:
+      return Object.assign({}, state, {
+        isSubmitting: true,
+        error: action.error,
+        source: action.payload
+      });
+    case actions.CREATE_SOURCE_SUCCESS:
+      return Object.assign({}, state, {
+        isSubmitting: false,
+        error: action.error,
+        source: new Source()
+      });
+    case actions.CREATE_SOURCE_FAILURE:
+      return Object.assign({}, state, {
+        isSubmitting: false,
         error: action.error
       });
     default:

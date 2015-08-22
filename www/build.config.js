@@ -2,10 +2,18 @@ var path = require('path');
 
 var paths = {
   js: {
-    src: path.resolve(__dirname, './oldhawaii_metadata/apps/static/jsx'),
-    src_files: path.resolve(__dirname, './oldhawaii_metadata/apps/static/jsx/app.js'),
-    dst: path.resolve(__dirname, './oldhawaii_metadata/apps/static/js'),
-    dst_filename: 'bundle.js'
+    digital_asset_form: {
+      src: path.resolve(__dirname, './oldhawaii_metadata/apps/static/jsx'),
+      src_files: path.resolve(__dirname, './oldhawaii_metadata/apps/static/jsx/digital_asset_form.js'),
+      dst: path.resolve(__dirname, './oldhawaii_metadata/apps/static/js'),
+      dst_filename: 'digital_asset_form.js'
+    },
+    source_form: {
+      src: path.resolve(__dirname, './oldhawaii_metadata/apps/static/jsx'),
+      src_files: path.resolve(__dirname, './oldhawaii_metadata/apps/static/jsx/source_form.js'),
+      dst: path.resolve(__dirname, './oldhawaii_metadata/apps/static/js'),
+      dst_filename: 'source_form.js'
+    }
   },
   styles: {
     src: path.resolve(__dirname, './oldhawaii_metadata/apps/static/sass'),

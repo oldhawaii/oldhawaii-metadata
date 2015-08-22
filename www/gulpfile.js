@@ -13,7 +13,10 @@ var gulp = require('gulp'),
 
 function clean(cb) {
   console.log('-> cleaning...');
-  del([paths.js.dst], cb);
+
+  for (var key in paths.js) {
+    del([paths.js[key].dst]);
+  }
 }
 
 function compile(watch) {
@@ -25,13 +28,15 @@ function compile(watch) {
     var config = require('./webpack.config.js');
     config['watch'] = watch;
 
-    gulp.src(paths.js.src_files)
-        .pipe(webpack(config))
-        .on('error', function(err) { console.error(err); this.emit('end'); })
-        .pipe(sourcemaps.init({ loadMaps: true }))
-        .pipe(sourcemaps.write('./'))
-        .pipe(size())
-        .pipe(gulp.dest(paths.js.dst));
+    for (var key in paths.js) {
+      gulp.src(paths.js[key].src_files)
+          .pipe(webpack(config))
+          .on('error', function(err) { console.error(err); this.emit('end'); })
+          .pipe(sourcemaps.init({ loadMaps: true }))
+          .pipe(sourcemaps.write('./'))
+          .pipe(size())
+          .pipe(gulp.dest(paths.js[key].dst));
+    }
   }
 
   rebundle();

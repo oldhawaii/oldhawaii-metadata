@@ -12,5 +12,9 @@
     Add
   </li>
 </ul>
-<h1>Coming Soon!</h1>
+<div id="source_form"></div>
 {% endblock main_content %}
+
+{% block js_custom %}
+<script src="{{ url_for('static', filename='js/source_form.bundle.js') }}"></script>
+{% endblock js_custom %}

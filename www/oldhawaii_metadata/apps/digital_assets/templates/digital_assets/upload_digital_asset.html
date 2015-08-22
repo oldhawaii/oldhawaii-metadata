@@ -12,5 +12,9 @@
     Upload
   </li>
 </ul>
-<div id="main"></div>
+<div id="digital_asset_form"></div>
 {% endblock main_content %}
+
+{% block js_custom %}
+<script src="{{ url_for('static', filename='js/digital_asset_form.bundle.js') }}"></script>
+{% endblock js_custom %}

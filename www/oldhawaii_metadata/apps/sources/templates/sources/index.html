@@ -16,6 +16,9 @@
         <tr>
             <th>Id</th>
             <th>Name</th>
+            <th>URL</th>
+            <th>Email</th>
+            <th>Phone</th>
         </tr>
     </thead>
     <tbody>
@@ -24,6 +27,21 @@
             <tr>
                 <td><a href="{{ url_for('sources.view_source', id=source._id) }}">{{ source._id }}</td>
                 <td>{{ source.name }}</td>
+                <td>
+                    {% if source.url%}
+                    <a href="{{ source.url }}">{{source.url}}</a>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if source.email %}
+                    <a href="mailto:{{ source.email }}">{{source.email}}</a>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if source.phone_number%}
+                    <a href="tel:{{ source.phone_number }}">{{source.phone_number}}</a>
+                    {% endif %}
+                </td>
             </tr>
             {% endfor %}
         {% endif %}

@@ -4,10 +4,11 @@ var webpack = require('webpack'),
 
 module.exports = {
   entry: {
-    app: [paths.js.src_files],
+    digital_asset_form: [paths.js.digital_asset_form.src_files],
+    source_form: [paths.js.source_form.src_files],
   },
   output: {
-    path: path.resolve(__dirname, paths.js.dst),
+    path: path.resolve(__dirname, paths.js.source_form.dst),
     filename: "[name].bundle.js",
     chunkFilename: "[name]-[id].bundle.js"
   },

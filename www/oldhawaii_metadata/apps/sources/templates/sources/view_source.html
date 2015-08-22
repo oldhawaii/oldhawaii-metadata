@@ -9,8 +9,39 @@
     <a href="{{ url_for('sources.index')}}">Sources</a>
   </li>
   <li class="active">
-    Add
+    View
   </li>
 </ul>
-<h1>Coming Soon!</h1>
+
+{% if source %}
+<div class="row">
+    <h4>Name</h4>
+    <p>
+      {{ source.name }}
+    </p>
+
+    <hr/>
+
+    <h4>URL</h4>
+    <p>
+      {{ source.url}}
+    </p>
+
+    <hr/>
+
+    <h4>Email</h4>
+    <p>
+      {{ source.email}}
+    </p>
+
+    <hr/>
+
+    <h4>Phone</h4>
+    <p>
+      {{ source.phone_number}}
+    </p>
+  </div>
+</div>
+{% endif %}
+
 {% endblock main_content %}

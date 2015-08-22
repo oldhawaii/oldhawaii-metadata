@@ -2,7 +2,7 @@
 
 import React from 'react';
 import DropzoneComponent from 'react-dropzone-component';
-import LatLongMap from './LatLongMap';
+import LatLonMap from './LatLonMap';
 
 class DigitalAssetForm extends React.Component {
 
@@ -10,6 +10,7 @@ class DigitalAssetForm extends React.Component {
     super(props);
     this.submit = this.submit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleLocationSelected = this.handleLocationSelected.bind(this);
   }
 
   displayName() {
@@ -20,6 +21,11 @@ class DigitalAssetForm extends React.Component {
     return function (e) {
       this.props.change_digital_asset_form(key, e.target.value);
     }.bind(this);
+  }
+
+  handleLocationSelected(lat, lng) {
+    console.log('LAT:' + lat);
+    console.log('LNG:' + lng);
   }
 
   submit(event) {
@@ -163,7 +169,11 @@ class DigitalAssetForm extends React.Component {
                  type='text'
                  value={this.props.digital_asset.author}></input>
         </div>
-        <LatLongMap />
+
+        <LatLonMap lat={this.props.digital_asset.latitude}
+                   lon={this.props.digital_asset.longitude}
+                   onLocationSelected={this.handleLocationSelected} />
+
         <div className='form-group'>
           <label htmlFor='latitude'>Latitude</label>
           <input className='form-control'

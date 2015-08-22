@@ -1,0 +1,16 @@
+{% extends 'layouts/base.html' %}
+
+{% block main_content %}
+<ul class="breadcrumb">
+  <li>
+    <a href="{{ url_for('www.slash')}}">Home</a>
+  </li>
+  <li>
+    <a href="{{ url_for('sources.index')}}">Sources</a>
+  </li>
+  <li class="active">
+    Add
+  </li>
+</ul>
+<h1>Coming Soon!</h1>
+{% endblock main_content %}

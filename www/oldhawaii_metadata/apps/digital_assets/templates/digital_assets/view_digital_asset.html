@@ -2,6 +2,18 @@
 
 {% block main_content %}
 
+<ul class="breadcrumb">
+  <li>
+    <a href="{{ url_for('www.slash')}}">Home</a>
+  </li>
+  <li>
+    <a href="{{ url_for('digital_assets.index')}}">Digital Assets</a>
+  </li>
+  <li class="active">
+    View
+  </li>
+</ul>
+
 {% if digital_asset %}
 <div class="row">
   <div class="page-header">

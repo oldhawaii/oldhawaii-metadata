@@ -4,6 +4,7 @@
 from flask import Blueprint
 from flask import render_template
 from flask.ext.login import login_required
+import json
 from oldhawaii_metadata.apps.api import sources_views
 
 
@@ -17,8 +18,9 @@ sources = Blueprint(
 @sources.route('/')
 @login_required
 def index():
-    sources = sources_views.get_all()
-    sources = sources.get('_items', None) if sources else None
+    res = sources_views.get_all()
+    json_response = json.loads(res.data)
+    sources = json_response.get('_items', None) if json_response else None
     return render_template('sources/index.html',
                            sources=sources)
 
@@ -32,14 +34,15 @@ def add_source():
 @sources.route('/<string:id>', methods=['GET'])
 @login_required
 def view_source(id):
-    source = sources_views.read(id)
+    res = sources_views.read(id)
+    source = json.loads(res.data)
     return render_template('sources/view_source.html', source=source)
 
 
-@sources.route('/<string:id>/edit', methods=['GET', 'POST'])
+@sources.route('/<string:id>/edit', methods=['GET'])
 @login_required
 def edit_source(id):
-    return render_template('sources/edit_source.html')
+    return render_template('sources/edit_source.html', source_id=id)
 
 
 # vim: filetype=python

@@ -16,20 +16,43 @@ class ResourceApiClient(object):
 
     def create(self, resource_as_json):
         headers = {'Content-Type': 'application/json'}
-        return requests.post(
+        r = requests.post(
             self.endpoint(),
             data=json.dumps(resource_as_json),
             headers=headers)
+        if r.status_code == 201:
+            return r.json()["_id"]
+        else:
+            return None
+
+    def update(self, resource_as_json):
+        headers = {'Content-Type': 'application/json'}
+        url = '{0}{1}'.format(self.endpoint(), resource_as_json['id'])
+        r = requests.put(
+            url,
+            data=json.dumps(resource_as_json),
+            headers=headers)
+        print r.__dict__
+        if r.status_code == 200:
+            return r.json()["_id"]
+        else:
+            return None
 
     def get_all(self, pagination_and_filters=None):
         url = "{0}?{1}".format(self.endpoint(), pagination_and_filters or '')
         r = requests.get(url)
-        return r.json()
+        if r.status_code == 200:
+            return r.json()
+        else:
+            return None
 
     def get_by_id(self, id):
         url = '{0}{1}'.format(self.endpoint(), id)
         r = requests.get(url)
-        return r.json()
+        if r.status_code == 200:
+            return r.json()
+        else:
+            return None
 
 
 # vim: filetype=python

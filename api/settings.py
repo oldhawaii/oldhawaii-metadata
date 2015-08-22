@@ -9,7 +9,7 @@ MONGO_PASSWORD = os.environ.get('MONGO_PASSWORD', '')
 MONGO_DBNAME = os.environ.get('MONGO_DBNAME', 'oldhawaii')
 DEBUG = True
 SOFT_DELETE = True
-
+IF_MATCH = False
 
 RESOURCE_METHODS = ['GET', 'POST', 'DELETE']
 ITEM_METHODS = ['GET', 'PATCH', 'DELETE']

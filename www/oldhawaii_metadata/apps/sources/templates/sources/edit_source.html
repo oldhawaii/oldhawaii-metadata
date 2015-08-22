@@ -1,0 +1,21 @@
+{% extends 'layouts/base.html' %}
+
+{% block main_content %}
+<ul class="breadcrumb">
+  <li>
+    <a href="{{ url_for('www.slash')}}">Home</a>
+  </li>
+  <li>
+    <a href="{{ url_for('sources.index')}}">Sources</a>
+  </li>
+  <li class="active">
+    Edit
+  </li>
+</ul>
+
+<div id="source_form" data-source-id="{{ source_id }}"></div>
+{% endblock main_content %}
+
+{% block js_custom %}
+<script src="{{ url_for('static', filename='js/source_form.bundle.js') }}"></script>
+{% endblock js_custom %}

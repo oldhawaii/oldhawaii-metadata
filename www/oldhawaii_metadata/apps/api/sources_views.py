@@ -20,34 +20,37 @@ sources_api = Blueprint(
 def create():
     json_data = json.loads(request.data)
     client = ResourceApiClient(BASE_API_URL, 'sources')
-    response = client.create(json_data)
-    if response.status_code == 201:
-        return jsonify(**request.json)
-    else:
-        return response.text, response.status_code
+    id = client.create(json_data)
+    return jsonify(id)
 
 
 @sources_api.route('/', methods=['GET'])
 @login_required
 def get_all():
     client = ResourceApiClient(BASE_API_URL, 'sources')
-    return client.get_all(request.query_string)
+    sources = client.get_all(request.query_string)
+    return jsonify(sources)
 
 
-@sources_api.route('/<int:id>', methods=['GET'])
+@sources_api.route('/<string:id>', methods=['GET'])
 @login_required
 def read(id):
     client = ResourceApiClient(BASE_API_URL, 'sources')
-    return client.get_by_id(id)
+    source = client.get_by_id(id)
+    return jsonify(source)
 
 
-@sources_api.route('/<int:id>', methods=['POST'])
+@csrf.exempt
+@sources_api.route('/<string:id>', methods=['PUT'])
 @login_required
 def update(id):
-    pass
+    json_data = json.loads(request.data)
+    client = ResourceApiClient(BASE_API_URL, 'sources')
+    id = client.update(json_data)
+    return jsonify(id)
 
 
-@sources_api.route('/<int:id>', methods=['DELETE'])
+@sources_api.route('/<string:id>', methods=['DELETE'])
 @login_required
 def delete(id):
     pass

@@ -70,6 +70,29 @@ const initialSourceState = {
 
 export function sources(state = initialSourceState, action) {
   switch (action.type) {
+    case actions.LOAD_SOURCE:
+      return Object.assign({}, state, {
+        isSubmitting: false,
+        error: action.error
+      });
+    case actions.LOAD_SOURCE_SUCCESS:
+      const load_s = new Source(
+          action.payload.name,
+          action.payload.url,
+          action.payload.email,
+          action.payload.phone_number
+        );
+      load_s.id = action.payload._id;
+      return Object.assign({}, state, {
+        isSubmitting: false,
+        error: action.error,
+        source: load_s
+      });
+    case actions.LOAD_SOURCE_FAILURE:
+      return Object.assign({}, state, {
+        isSubmitting: false,
+        error: action.error
+      });
     case actions.CHANGE_SOURCE_FORM:
       const new_s = new Source();
       Object.assign(new_s, state.source);
@@ -91,6 +114,23 @@ export function sources(state = initialSourceState, action) {
         source: new Source()
       });
     case actions.CREATE_SOURCE_FAILURE:
+      return Object.assign({}, state, {
+        isSubmitting: false,
+        error: action.error
+      });
+    case actions.UPDATE_SOURCE:
+      return Object.assign({}, state, {
+        isSubmitting: true,
+        error: action.error,
+        source: action.payload
+      });
+    case actions.UPDATE_SOURCE_SUCCESS:
+      return Object.assign({}, state, {
+        isSubmitting: false,
+        error: action.error,
+        source: action.payload
+      });
+    case actions.UPDATE_SOURCE_FAILURE:
       return Object.assign({}, state, {
         isSubmitting: false,
         error: action.error

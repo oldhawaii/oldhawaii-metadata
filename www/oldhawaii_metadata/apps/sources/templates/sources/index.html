@@ -19,6 +19,7 @@
             <th>URL</th>
             <th>Email</th>
             <th>Phone</th>
+            <th class="text-center">Edit</th>
         </tr>
     </thead>
     <tbody>
@@ -41,6 +42,11 @@
                     {% if source.phone_number%}
                     <a href="tel:{{ source.phone_number }}">{{source.phone_number}}</a>
                     {% endif %}
+                </td>
+                <td class="text-center">
+                    <a href="{{ url_for('sources.edit_source', id=source._id) }}">
+                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                    </a>
                 </td>
             </tr>
             {% endfor %}

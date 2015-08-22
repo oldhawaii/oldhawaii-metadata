@@ -1,41 +1,41 @@
 'use strict';
 
 import * as actions from '../actions';
-import Metadata from '../models/Metadata';
+import DigitalAsset from '../models/DigitalAsset';
 
 const initialState = {
   dropzone: null,
   dropzone_file_stats: null,
   error: false,
   isSubmitting: false,
-  metadata: new Metadata()
+  digital_asset: new DigitalAsset()
 };
 
-export function metadatas(state = initialState, action) {
+export function digital_assets(state = initialState, action) {
   switch (action.type) {
-    case actions.CHANGE_METADATA_FORM:
-      const new_metadata_state = new Metadata();
-      Object.assign(new_metadata_state, state.metadata);
-      new_metadata_state[action.payload.key] = action.payload.value;
+    case actions.CHANGE_DIGITAL_ASSET_FORM:
+      const new_da = new DigitalAsset();
+      Object.assign(new_da, state.digital_asset);
+      new_da[action.payload.key] = action.payload.value;
       return Object.assign({}, state, {
         error: action.error,
-        metadata: new_metadata_state
+        digital_asset: new_da
       });
-    case actions.CREATE_METADATA:
+    case actions.CREATE_DIGITAL_ASSET:
       return Object.assign({}, state, {
         isSubmitting: true,
         error: action.error,
-        metadata: action.payload
+        digital_asset: action.payload
       });
-    case actions.CREATE_METADATA_SUCCESS:
+    case actions.CREATE_DIGITAL_ASSET_SUCCESS:
       return Object.assign({}, state, {
         isSubmitting: false,
         error: action.error,
-        metadata: new Metadata(),
+        digital_asset: new DigitalAsset(),
         dropzone: null,
         dropzone_file_stats: null
       });
-    case actions.CREATE_METADATA_FAILURE:
+    case actions.CREATE_DIGITAL_ASSET_FAILURE:
       return Object.assign({}, state, {
         isSubmitting: false,
         error: action.error
@@ -46,14 +46,14 @@ export function metadatas(state = initialState, action) {
         error: action.error
       });
     case actions.DROPZONE_UPLOAD_SUCCESS:
-      const new_with_image = new Metadata();
-      Object.assign(new_with_image, state.metadata);
+      const new_with_image = new DigitalAsset();
+      Object.assign(new_with_image, state.digital_asset);
       new_with_image['image_url'] = action.payload.image_url;
       new_with_image['image_width'] = action.payload.image_width;
       new_with_image['image_height'] = action.payload.image_height;
       return Object.assign({}, state, {
         dropzone_file_stats: action.payload,
-        metadata: new_with_image,
+        digital_asset: new_with_image,
         error: action.error
       });
     default:

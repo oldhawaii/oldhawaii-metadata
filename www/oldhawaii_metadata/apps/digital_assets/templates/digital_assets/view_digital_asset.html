@@ -1,30 +1,31 @@
 {% extends 'layouts/base.html' %}
 
 {% block main_content %}
-{% if metadata %}
+
+{% if digital_asset %}
 <div class="row">
   <div class="page-header">
-    <h1>{{ metadata.title }}</h1>
+    <h1>{{ digital_asset.title }}</h1>
   </div>
   <div class="col-xs-6 col-md-4">
     <h4>Description</h4>
     <p>
-      {{ metadata.description }}
+      {{ digital_asset.description }}
     </p>
 
     <hr/>
 
     <h4>Author</h4>
     <p>
-      {{ metadata.author }}
+      {{ digital_asset.author }}
     </p>
 
     <hr/>
 
     <h4>Published Date</h4>
     <p>
-    {% if metadata.published_at %}
-      {{ metadata.published_at }}
+    {% if digital_asset.published_at %}
+      {{ digital_asset.published_at }}
     {% else %}
       Unknown
     {% endif %}
@@ -32,12 +33,13 @@
   </div>
 
   <div class="col-xs-12 col-md-8">
-    {% if metadata.image_url %}
-    <img src="{{ metadata.image_url }}"/>
+    {% if digital_asset.image_url %}
+    <img src="{{ digital_asset.image_url }}"/>
     {% else %}
     <img src="http://fillmurray.com/640/480"/>
     {% endif %}
   </div>
 </div>
 {% endif %}
+
 {% endblock main_content %}

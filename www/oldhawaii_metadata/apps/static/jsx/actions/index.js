@@ -1,47 +1,47 @@
 import request from 'superagent';
 
-export const CHANGE_METADATA_FORM = 'CHANGE_METADATA_FORM';
-export const CREATE_METADATA = 'CREATE_METADATA';
-export const CREATE_METADATA_SUCCESS = 'CREATE_METADATA_SUCCESS';
-export const CREATE_METADATA_FAILURE = 'CREATE_METADATA_FAILURE';
+export const CHANGE_DIGITAL_ASSET_FORM = 'CHANGE_DIGITAL_ASSET_FORM';
+export const CREATE_DIGITAL_ASSET = 'CREATE_DIGITAL_ASSET';
+export const CREATE_DIGITAL_ASSET_SUCCESS = 'CREATE_DIGITAL_ASSET_SUCCESS';
+export const CREATE_DIGITAL_ASSET_FAILURE = 'CREATE_DIGITAL_ASSET_FAILURE';
 export const DROPZONE_LOAD_SUCCESS = 'DROPZONE_LOAD_SUCCESS';
 export const DROPZONE_UPLOAD_SUCCESS = 'DROPZONE_UPLOAD_SUCCESS';
 
-export function change_metadata_form(key, value) {
+export function change_digital_asset_form(key, value) {
   return {
-    type: CHANGE_METADATA_FORM,
+    type: CHANGE_DIGITAL_ASSET_FORM,
     payload: {key: key, value: value},
     error: false
   };
 }
 
-export function create_metadata(metadata) {
+export function create_digital_asset(digital_asset) {
   return dispatch => {
-    const data = JSON.parse(JSON.stringify(metadata));
-    request.post('/api/metadatas/')
+    const data = JSON.parse(JSON.stringify(digital_asset));
+    request.post('/api/digital_assets/')
            .send(data)
            .end(function (err, res) {
               if (err) {
               } else if (res.ok) {
-                dispatch(create_metadata_success(metadata));
+                dispatch(create_digital_asset_success(digital_asset));
               } else {
-                dispatch(create_metadata_failure(metadata));
+                dispatch(create_digital_asset_failure(digital_asset));
               }
             });
   };
 }
 
-export function create_metadata_success(response) {
+export function create_digital_asset_success(response) {
   return {
-    type: CREATE_METADATA_SUCCESS,
+    type: CREATE_DIGITAL_ASSET_SUCCESS,
     payload: response,
     error: false
   };
 }
 
-export function create_metadata_failure(response) {
+export function create_digital_asset_failure(response) {
   return {
-    type: CREATE_METADATA_FAILURE,
+    type: CREATE_DIGITAL_ASSET_FAILURE,
     payload: response,
     error: true
   };

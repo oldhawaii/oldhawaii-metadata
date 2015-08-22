@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from .metadata_views import metadata_api
+from .digital_assets_views import digital_assets_api
 
 # vim: filetype=python

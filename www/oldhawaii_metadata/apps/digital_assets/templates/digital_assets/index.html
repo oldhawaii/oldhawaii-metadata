@@ -1,0 +1,41 @@
+{% extends 'layouts/base.html' %}
+
+{% block main_content %}
+<ul class="breadcrumb">
+  <li>
+    <a href="/">Home</a>
+  </li>
+  <li class="active">
+    View All
+  </li>
+</ul>
+
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Author</th>
+            <th>Lat, Long</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% if digital_assets %}
+            {% for digital_asset in digital_assets %}
+            <tr>
+                <td><a href="{{ url_for('digital_assets.view_digital_asset', id=digital_asset._id) }}">{{ digital_asset._id }}</td>
+                <td>{{ digital_asset.title }}</td>
+                <td>{{ digital_asset.description }}</td>
+                <td>{{ digital_asset.author }}</td>
+                <td>{{ digital_asset.latitude }}, {{ digital_asset.longitude}}</td>
+            </tr>
+            {% endfor %}
+        {% endif %}
+    </tbody>
+    <tfoot>
+    </tfoot>
+  </table>
+</div>
+{% endblock main_content %}

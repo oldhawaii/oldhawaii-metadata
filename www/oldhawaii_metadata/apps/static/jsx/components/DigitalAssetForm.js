@@ -3,7 +3,7 @@
 import React from 'react';
 import DropzoneComponent from 'react-dropzone-component';
 
-class MetadataForm extends React.Component {
+class DigitalAssetForm extends React.Component {
 
   constructor(props) {
     super(props);
@@ -12,18 +12,18 @@ class MetadataForm extends React.Component {
   }
 
   displayName() {
-    return 'MetadataForm';
+    return 'DigitalAssetForm';
   }
 
   handleChange(key) {
     return function (e) {
-      this.props.change_metadata_form(key, e.target.value);
+      this.props.change_digital_asset_form(key, e.target.value);
     }.bind(this);
   }
 
   submit(event) {
     event.preventDefault();
-    this.props.create_metadata(this.props.metadata);
+    this.props.create_digital_asset(this.props.digital_asset);
   }
 
   // Should break into tiny components, but I'm lazy.
@@ -31,7 +31,7 @@ class MetadataForm extends React.Component {
     const componentConfig = {
       allowedFiletypes: ['.jpg', '.png', '.gif'],
       showFiletypeIcon: true,
-      postUrl: '/metadatas/upload'
+      postUrl: '/digital_assets/upload/content'
     };
 
     const eventHandlers = {
@@ -115,17 +115,17 @@ class MetadataForm extends React.Component {
                   <input className='form-control'
                          name='image_url'
                          readOnly
-                         value={this.props.metadata.image_url}/>
+                         value={this.props.digital_asset.image_url}/>
                   <label htmlFor='image_width'>Image Width</label>
                   <input className='form-control'
                          name='image_width'
                          readOnly
-                         value={this.props.metadata.image_width}/>
+                         value={this.props.digital_asset.image_width}/>
                   <label htmlFor='image_height'>Image Height</label>
                   <input className='form-control'
                          name='image_height'
                          readOnly
-                         value={this.props.metadata.image_height}/>
+                         value={this.props.digital_asset.image_height}/>
                   </div>
                  );
     }
@@ -140,7 +140,7 @@ class MetadataForm extends React.Component {
                  onChange={this.handleChange('title')}
                  placeholder='Title'
                  type='text'
-                 value={this.props.metadata.title}></input>
+                 value={this.props.digital_asset.title}></input>
         </div>
         <div className='form-group'>
           <label htmlFor='description'>Description</label>
@@ -148,7 +148,7 @@ class MetadataForm extends React.Component {
                     id='description'
                     onChange={this.handleChange('description')}
                     placeholder='Enter a description'
-                    value={this.props.metadata.description}></textarea>
+                    value={this.props.digital_asset.description}></textarea>
         </div>
         <div className='form-group'>
           <label htmlFor='author'>Author</label>
@@ -157,7 +157,7 @@ class MetadataForm extends React.Component {
                  onChange={this.handleChange('author')}
                  placeholder='Author'
                  type='text'
-                 value={this.props.metadata.author}></input>
+                 value={this.props.digital_asset.author}></input>
         </div>
         <div className='form-group'>
           <label htmlFor='latitude'>Latitude</label>
@@ -167,7 +167,7 @@ class MetadataForm extends React.Component {
                  placeholder='Latitude'
                  step='any'
                  type='number'
-                 value={this.props.metadata.latitude}></input>
+                 value={this.props.digital_asset.latitude}></input>
         </div>
         <div className='form-group'>
           <label htmlFor='author'>Longitude</label>
@@ -177,7 +177,7 @@ class MetadataForm extends React.Component {
                  placeholder='Longitude'
                  step='any'
                  type='number'
-                 value={this.props.metadata.longitude}></input>
+                 value={this.props.digital_asset.longitude}></input>
         </div>
         <button className='btn btn-default'
                 disabled={this.props.isSubmitting}
@@ -187,16 +187,16 @@ class MetadataForm extends React.Component {
   }
 };
 
-MetadataForm.propTypes = {
-  change_metadata_form: React.PropTypes.function,
-  create_metadata: React.PropTypes.function,
+DigitalAssetForm.propTypes = {
+  change_digital_asset_form: React.PropTypes.function,
+  create_digital_asset: React.PropTypes.function,
+  digital_asset: React.PropTypes.object,
   dropzone: React.PropTypes.object,
   dropzone_file_stats: React.PropTypes.object,
   dropzone_load_success: React.PropTypes.function,
   dropzone_upload_success: React.PropTypes.function,
   error: React.PropTypes.bool,
-  isSubmitting: React.PropTypes.bool,
-  metadata: React.PropTypes.object
+  isSubmitting: React.PropTypes.bool
 };
 
-export default MetadataForm;
+export default DigitalAssetForm;

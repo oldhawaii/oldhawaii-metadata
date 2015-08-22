@@ -15,7 +15,7 @@ www = Blueprint('www', __name__, template_folder='templates')
 @www.route('/')
 def slash():
     if current_user.is_authenticated():
-        return redirect(url_for('metadatas.index'))
+        return redirect(url_for('digital_assets.index'))
 
     form = LoginForm()
     return render_template('www/slash.html', form=form)

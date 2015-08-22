@@ -19,12 +19,14 @@ CACHE_EXPIRES = 20
 
 X_DOMAINS = "*"
 
-metadatas = {
-    'item_title': 'metadatas',
-
+digital_assets = {
+    'item_title': 'digital_assets',
     'schema': {
-        'type': {'type': 'string'},
-        'source': {'type': 'objectid'},
+        'type': {
+            'type': 'string',
+            'allowed': ['image', 'audio']
+        },
+        'source_organization': {'type': 'objectid'},
         'title': {'type': 'string'},
         'description': {'type': 'string'},
         'author': {'type': 'string'},
@@ -46,11 +48,13 @@ metadatas = {
     }
 }
 
-sources = {
-    'item_title': 'sources',
+source_organizations = {
+    'item_title': 'source_organizations',
     'schema': {
         'name': {'type': 'string'},
         'url': {'type': 'string'},
+        'email': {'type': 'string'},
+        'phone_number': {'type': 'string'},
         'created_at': {'type': 'datetime'},
         'created_by': {'type': 'string'},
         'updated_at': {'type': 'datetime'},
@@ -59,7 +63,8 @@ sources = {
 }
 
 DOMAIN = {
-    'metadatas': metadatas
+    'digital_assets': digital_assets,
+    'source_organizations': source_organizations
 }
 
 # vim: filetype=python

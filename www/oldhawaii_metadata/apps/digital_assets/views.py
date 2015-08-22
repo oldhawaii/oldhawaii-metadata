@@ -6,6 +6,7 @@ from flask import jsonify
 from flask import render_template
 from flask import request
 from flask.ext.login import login_required
+import json
 from oldhawaii_metadata.apps.api import digital_assets_views
 from oldhawaii_metadata.extensions import csrf
 from oldhawaii_metadata.extensions import store
@@ -22,8 +23,9 @@ digital_assets = Blueprint(
 @digital_assets.route('/')
 @login_required
 def index():
-    dig_assets = digital_assets_views.get_all()
-    dig_assets = dig_assets.get('_items', None) if dig_assets else None
+    res = digital_assets_views.get_all()
+    json_response = json.loads(res.data)
+    dig_assets = json_response.get('_items', None) if json_response else None
     return render_template('digital_assets/index.html',
                            digital_assets=dig_assets)
 
@@ -43,7 +45,8 @@ def link_digital_asset():
 @digital_assets.route('/<string:id>', methods=['GET'])
 @login_required
 def view_digital_asset(id):
-    dig_asset = digital_assets_views.read(id)
+    res = digital_assets_views.read(id)
+    dig_asset = json.loads(res.data)
     return render_template('digital_assets/view_digital_asset.html',
                            digital_asset=dig_asset)
 

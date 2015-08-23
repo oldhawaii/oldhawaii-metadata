@@ -39,6 +39,7 @@ The WWW server is a [Flask](http://flask.pocoo.org/) implementation with a
   * Need to add update digital assets of type audio
   * Need to add delete digital assets of type audio
   * Need to add delete source organization confirmation dialog
+  * Need to add link digital assets of type image
   * ~~Need to add csrf token to metatag for digital assets post request~~
   * ~~Need to add create source organization~~
   * ~~Need to add read source organization~~
@@ -49,6 +50,7 @@ The WWW server is a [Flask](http://flask.pocoo.org/) implementation with a
   * Need to add user roles
   * Need to add auto-complete for source organization
   * Need to add Flask-Sentinel to API server
+  * ~~Need to add os-level build notifications~~
   * Need to add script to backup mongo somewhere
   * Need to add code to shut off middleware logging
   * Need to add jest test cases for all routes

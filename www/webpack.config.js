@@ -1,6 +1,7 @@
 var webpack = require('webpack'),
        path = require('path'),
-      paths = require('./build.config');
+      paths = require('./build.config'),
+  WebpackNotifierPlugin = require('webpack-notifier');
 
 module.exports = {
   entry: {
@@ -27,6 +28,7 @@ module.exports = {
     configFile: '.eslintrc'
   },
   plugins: [
+    new WebpackNotifierPlugin(),
     new webpack.NoErrorsPlugin()
   ]
 };

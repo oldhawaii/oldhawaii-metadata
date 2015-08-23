@@ -50,7 +50,7 @@ def edit_source(id):
 @sources.route('/<string:id>/delete', methods=['POST'])
 @login_required
 def delete_source(id):
-    res = sources_views.delete(id)
+    sources_views.delete(id)
     return redirect(url_for('sources.index'))
 
 

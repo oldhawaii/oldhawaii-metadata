@@ -21,7 +21,7 @@ def create():
     json_data['longitude'] = float(json_data['longitude'])
     client = ResourceApiClient(BASE_API_URL, 'digital_assets')
     id = client.create(json_data)
-    return jsonify({id: id})
+    return jsonify({'id': id})
 
 
 @digital_assets_api.route('/', methods=['GET'])

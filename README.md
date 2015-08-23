@@ -51,6 +51,7 @@ The WWW server is a [Flask](http://flask.pocoo.org/) implementation with a
   * Need to add auto-complete for source organization
   * Need to add Flask-Sentinel to API server
   * ~~Need to add os-level build notifications~~
+  * Need to check all falsey code. Who knows if I did this right? :D
   * Need to add script to backup mongo somewhere
   * Need to add code to shut off middleware logging
   * Need to add jest test cases for all routes

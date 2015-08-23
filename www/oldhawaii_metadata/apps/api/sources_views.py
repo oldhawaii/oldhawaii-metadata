@@ -19,7 +19,7 @@ def create():
     json_data = json.loads(request.data)
     client = ResourceApiClient(BASE_API_URL, 'sources')
     id = client.create(json_data)
-    return jsonify({id: id})
+    return jsonify({'id': id})
 
 
 @sources_api.route('/', methods=['GET'])
@@ -44,12 +44,14 @@ def update(id):
     json_data = json.loads(request.data)
     client = ResourceApiClient(BASE_API_URL, 'sources')
     id = client.update(json_data)
-    return jsonify({id: id})
+    return jsonify({'id': id})
 
 
 @sources_api.route('/<string:id>', methods=['DELETE'])
 @login_required
 def delete(id):
-    pass
+    client = ResourceApiClient(BASE_API_URL, 'sources')
+    result = client.delete(id)
+    return jsonify({'id': id, 'status': result})
 
 # vim: filetype=python

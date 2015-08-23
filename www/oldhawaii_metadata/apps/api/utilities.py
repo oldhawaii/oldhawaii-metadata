@@ -25,18 +25,6 @@ class ResourceApiClient(object):
         else:
             return None
 
-    def update(self, resource_as_json):
-        headers = {'Content-Type': 'application/json'}
-        url = '{0}{1}'.format(self.endpoint(), resource_as_json.pop('_id'))
-        r = requests.patch(
-            url,
-            data=json.dumps(resource_as_json),
-            headers=headers)
-        if r.status_code == 200:
-            return r.json()["_id"]
-        else:
-            return None
-
     def get_all(self, pagination_and_filters=None):
         url = "{0}?{1}".format(self.endpoint(), pagination_and_filters or '')
         r = requests.get(url)
@@ -52,6 +40,24 @@ class ResourceApiClient(object):
             return r.json()
         else:
             return None
+
+    def update(self, resource_as_json):
+        headers = {'Content-Type': 'application/json'}
+        url = '{0}{1}'.format(self.endpoint(), resource_as_json.pop('_id'))
+        r = requests.patch(
+            url,
+            data=json.dumps(resource_as_json),
+            headers=headers)
+        if r.status_code == 200:
+            return r.json()["_id"]
+        else:
+            return None
+
+    def delete(self, id):
+        headers = {'Content-Type': 'application/json'}
+        url = '{0}{1}'.format(self.endpoint(), id)
+        r = requests.delete(url, headers=headers)
+        return True if r.status_code == 204 else False
 
 
 # vim: filetype=python

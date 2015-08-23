@@ -2,7 +2,9 @@
 # -*- coding: utf-8 -*-
 
 from flask import Blueprint
+from flask import redirect
 from flask import render_template
+from flask import url_for
 from flask.ext.login import login_required
 import json
 from oldhawaii_metadata.apps.api import sources_views
@@ -43,6 +45,13 @@ def view_source(id):
 @login_required
 def edit_source(id):
     return render_template('sources/edit_source.html', source_id=id)
+
+
+@sources.route('/<string:id>/delete', methods=['POST'])
+@login_required
+def delete_source(id):
+    res = sources_views.delete(id)
+    return redirect(url_for('sources.index'))
 
 
 # vim: filetype=python

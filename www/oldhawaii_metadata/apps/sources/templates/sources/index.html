@@ -19,7 +19,7 @@
             <th>URL</th>
             <th>Email</th>
             <th>Phone</th>
-            <th class="text-center">Edit</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -43,10 +43,16 @@
                     <a href="tel:{{ source.phone_number }}">{{source.phone_number}}</a>
                     {% endif %}
                 </td>
-                <td class="text-center">
-                    <a href="{{ url_for('sources.edit_source', id=source._id) }}">
+                <td class="text-align">
+                    <a class="btn btn-default btn-sm pull-left" href="{{ url_for('sources.edit_source', id=source._id) }}">
                         <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                     </a>
+                    <form method="post" role="form" class="pull-left form-inline" action="{{ url_for('sources.delete_source', id=source._id) }}">&nbsp;
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                        <button class="btn btn-danger btn-sm" type="submit"><span
+                        class="glyphicon glyphicon-remove" aria-hidden="true"/>
+                        </button>
+                    </form>
                 </td>
             </tr>
             {% endfor %}

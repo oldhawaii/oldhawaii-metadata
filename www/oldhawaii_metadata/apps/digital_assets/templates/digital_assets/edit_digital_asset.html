@@ -1,0 +1,25 @@
+{% extends 'layouts/base.html' %}
+
+{% block meta_custom %}
+<meta name="csrf-token" content="{{ csrf_token() }}"/>
+{% endblock meta_custom %}
+
+{% block main_content %}
+<ul class="breadcrumb">
+  <li>
+    <a href="{{ url_for('www.slash')}}">Home</a>
+  </li>
+  <li>
+    <a href="{{ url_for('digital_assets.index')}}">Digital Assets</a>
+  </li>
+  <li class="active">
+    Edit
+  </li>
+</ul>
+
+<div id="digital_asset_form" data-digital-asset-id="{{ digital_asset_id }}"></div>
+{% endblock main_content %}
+
+{% block js_custom %}
+<script src="{{ url_for('static', filename='js/digital_asset_form.bundle.js') }}"></script>
+{% endblock js_custom %}

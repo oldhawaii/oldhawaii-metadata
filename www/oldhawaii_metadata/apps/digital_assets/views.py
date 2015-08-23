@@ -3,8 +3,10 @@
 
 from flask import Blueprint
 from flask import jsonify
+from flask import redirect
 from flask import render_template
 from flask import request
+from flask import url_for
 from flask.ext.login import login_required
 import json
 from oldhawaii_metadata.apps.api import digital_assets_views
@@ -55,6 +57,13 @@ def view_digital_asset(id):
 @login_required
 def edit_digital_asset(id):
     return render_template('digital_assets/edit_digital_asset.html')
+
+
+@digital_assets.route('/<string:id>/delete', methods=['POST'])
+@login_required
+def delete_digital_asset(id):
+    digital_assets_views.delete(id)
+    return redirect(url_for('digital_assets.index'))
 
 
 @csrf.exempt

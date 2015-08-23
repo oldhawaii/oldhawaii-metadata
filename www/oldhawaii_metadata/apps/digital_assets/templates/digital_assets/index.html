@@ -19,6 +19,7 @@
             <th>Description</th>
             <th>Author</th>
             <th>Lat, Long</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -30,6 +31,18 @@
                 <td>{{ digital_asset.description }}</td>
                 <td>{{ digital_asset.author }}</td>
                 <td>{{ digital_asset.latitude }}, {{ digital_asset.longitude}}</td>
+                <td class="text-align">
+                    <a class="btn btn-default btn-sm pull-left" href="{{ url_for('digital_assets.edit_digital_asset', id=digital_asset._id) }}">
+                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                    </a>
+                    <form method="post" role="form" class="pull-left form-inline" action="{{ url_for('digital_assets.delete_digital_asset', id=digital_asset._id) }}">
+                        &nbsp;
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                        <button class="btn btn-danger btn-sm" type="submit"><span
+                        class="glyphicon glyphicon-remove" aria-hidden="true"/>
+                        </button>
+                    </form>
+                </td>
             </tr>
             {% endfor %}
         {% endif %}

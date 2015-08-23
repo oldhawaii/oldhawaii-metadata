@@ -43,12 +43,17 @@ def read(id):
 @digital_assets_api.route('/<string:id>', methods=['POST'])
 @login_required
 def update(id):
-    pass
+    json_data = json.loads(request.data)
+    client = ResourceApiClient(BASE_API_URL, 'digital_assets')
+    id = client.update(json_data)
+    return jsonify({'id': id})
 
 
 @digital_assets_api.route('/<string:id>', methods=['DELETE'])
 @login_required
 def delete(id):
-    pass
+    client = ResourceApiClient(BASE_API_URL, 'digital_assets')
+    result = client.delete(id)
+    return jsonify({'id': id, 'status': result})
 
 # vim: filetype=python

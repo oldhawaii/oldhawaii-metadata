@@ -32,16 +32,20 @@ The WWW server is a [Flask](http://flask.pocoo.org/) implementation with a
 
 ## TODO
 
-  * Need to add update metadata of type image
-  * Need to add delete metadata of type image
-  * Need to add create metadata of type audio
-  * Need to add read metadata of type audio
-  * Need to add update metadata of type audio
-  * Need to add delete metadata of type audio
-  * Need to add create source organization
-  * Need to add read source organization
-  * Need to add update source organization
+  * Need to add update digital assets of type image
+  * Need to add delete digital assets of type image
+  * Need to add create digital assets of type audio
+  * Need to add read digital assets of type audio
+  * Need to add update digital assets of type audio
+  * Need to add delete digital assets of type audio
+  * ~~Need to add csrf token to metatag for digital assets post request~~
+  * ~~Need to add create source organization~~
+  * ~~Need to add read source organization~~
+  * ~~Need to add update source organization~~
+  * ~~Need to add csrf token to metatag for source put/post requests~~
   * Need to add delete source organization
+  * Need to cleanup registration process
+  * Need to add user roles
   * Need to add auto-complete for source organization
   * Need to add Flask-Sentinel to API server
   * Need to add script to backup mongo somewhere

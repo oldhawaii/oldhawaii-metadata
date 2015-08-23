@@ -24,6 +24,17 @@ export const UPDATE_SOURCE_FAILURE = 'UPDATE_SOURCE_FAILURE ';
 
 // TODO: Use something like redux-action to get rid of codes
 
+export function get_csrf_token_from_meta(csrf_meta_name = 'csrf-token',
+  csrf_meta_attribute = 'content') {
+    const metas = document.getElementsByTagName('meta');
+    for (let i = 0; i < metas.length; i++) {
+      if (metas[i].getAttribute('name') === csrf_meta_name) {
+        return metas[i].getAttribute(csrf_meta_attribute);
+      }
+    }
+    return '';
+  }
+
 // DIGITAL ASSET FORM
 export function change_digital_asset_form(key, value) {
   return {
@@ -44,8 +55,10 @@ export function change_digital_asset_form_from_map(lat, lng) {
 export function create_digital_asset(digital_asset) {
   return dispatch => {
     const data = JSON.parse(JSON.stringify(digital_asset));
+    const csrf_token = get_csrf_token_from_meta();
     request.post('/api/digital_assets/')
            .send(data)
+           .set('X-CSRFToken', csrf_token)
            .end(function (err, res) {
               if (err) {
                 dispatch(create_digital_asset_failure(digital_asset));
@@ -136,8 +149,10 @@ export function change_source_form(key, value) {
 export function create_source(source) {
   return dispatch => {
     const data = JSON.parse(JSON.stringify(source));
+    const csrf_token = get_csrf_token_from_meta();
     request.post('/api/sources/')
            .send(data)
+           .set('X-CSRFToken', csrf_token)
            .end(function (err, res) {
               if (err) {
               } else if (res.ok) {
@@ -168,7 +183,9 @@ export function create_source_failure(response) {
 export function update_source(source) {
   return dispatch => {
     const data = JSON.parse(JSON.stringify(source));
+    const csrf_token = get_csrf_token_from_meta();
     request.put('/api/sources/' + source.id)
+           .set('X-CSRFToken', csrf_token)
            .send(data)
            .end(function (err, res) {
               if (err) {

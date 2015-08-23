@@ -6,7 +6,6 @@ from flask import jsonify
 from flask import request
 from flask.ext.login import login_required
 import json
-from oldhawaii_metadata.extensions import csrf
 from .utilities import ResourceApiClient
 
 BASE_API_URL = 'http://127.0.0.1:5001'
@@ -15,7 +14,6 @@ digital_assets_api = Blueprint(
     'digital_assets_api', __name__, url_prefix='/api/digital_assets')
 
 
-@csrf.exempt
 @digital_assets_api.route('/', methods=['POST'])
 def create():
     json_data = json.loads(request.data)

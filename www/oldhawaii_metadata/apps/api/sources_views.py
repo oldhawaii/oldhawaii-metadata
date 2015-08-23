@@ -6,7 +6,6 @@ from flask import jsonify
 from flask import request
 from flask.ext.login import login_required
 import json
-from oldhawaii_metadata.extensions import csrf
 from .utilities import ResourceApiClient
 
 BASE_API_URL = 'http://127.0.0.1:5001'
@@ -15,7 +14,6 @@ sources_api = Blueprint(
     'sources_api', __name__, url_prefix='/api/sources')
 
 
-@csrf.exempt
 @sources_api.route('/', methods=['POST'])
 def create():
     json_data = json.loads(request.data)
@@ -40,7 +38,6 @@ def read(id):
     return jsonify(source)
 
 
-@csrf.exempt
 @sources_api.route('/<string:id>', methods=['PUT'])
 @login_required
 def update(id):

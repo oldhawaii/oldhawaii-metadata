@@ -1,5 +1,9 @@
 {% extends 'layouts/base.html' %}
 
+{% block meta_custom %}
+<meta name="csrf-token" content="{{ csrf_token() }}"/>
+{% endblock meta_custom %}
+
 {% block main_content %}
 <ul class="breadcrumb">
   <li>

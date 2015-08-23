@@ -8,19 +8,22 @@
     <title>{% block title %}{% endblock title %}</title>
 
     {% block meta %}
+    {% block meta_shared %}
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <meta name="description" content="{% block meta_description %} {% endblock meta_description %}" />
     <meta name="author" content="{% block meta_author %}{% endblock meta_author %}" />
     <meta name="viewport" content="width=device-width" />
+    {% endblock meta_shared %}
+    {% block meta_custom %}{% endblock meta_custom %}
     {% endblock meta %}
 
     {% block css %}
-        {% block css_shared %}
-        <link rel="stylesheet" href="{{ url_for('static', filename='components/bootstrap/dist/css/bootstrap.min.css') }}" />
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
-        {% endblock css_shared %}
-        {% block css_custom %}{% endblock css_custom %}
+    {% block css_shared %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='components/bootstrap/dist/css/bootstrap.min.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+    {% endblock css_shared %}
+    {% block css_custom %}{% endblock css_custom %}
     {% endblock css%}
 </head>
 
@@ -110,7 +113,7 @@
               </div>
 
               <hr>
-            </div> 
+            </div>
         {% endblock main_content %}
     </div>
     {% endblock main %}
@@ -123,15 +126,13 @@
     {% endblock footer %}
 
     {% block js %}
-        {% block js_shared %}
-            <script src="{{ url_for('static', filename='components/react/react-with-addons.min.js') }}"></script>
-            <script src="{{ url_for('static', filename='components/jquery/dist/jquery.min.js') }}"></script>
-            <script src="{{ url_for('static', filename='components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
-        {% endblock js_shared %}
-        {% block js_custom %}{% endblock js_custom %}
+    {% block js_shared %}
+    <script src="{{ url_for('static', filename='components/react/react-with-addons.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='components/jquery/dist/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+    {% endblock js_shared %}
+    {% block js_custom %}{% endblock js_custom %}
     {% endblock js %}
-
-    {% include 'shared/ga.html' %}
 </body>
 {% endblock body %}
 </html>

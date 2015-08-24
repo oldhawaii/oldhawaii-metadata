@@ -26,39 +26,120 @@ digital_assets = {
             'type': 'string',
             'allowed': ['image', 'audio']
         },
-        'source_organization': {'type': 'objectid'},
-        'title': {'type': 'string'},
-        'description': {'type': 'string'},
-        'author': {'type': 'string'},
-        'published_date': {'type': 'datetime'},
-        'image_url': {'type': 'string'},
-        'image_width': {'type': 'integer'},
-        'image_height': {'type': 'integer'},
-        'thumbnail_url': {'type': 'string'},
-        'thumbnail_width': {'type': 'integer'},
-        'thumbnail_height': {'type': 'integer'},
-        'audio_url': {'type': 'string'},
-        'audio_length': {'type': 'integer'},
-        'latitude': {'type': 'number'},
-        'longitude': {'type': 'number'},
-        'created_at': {'type': 'datetime'},
-        'created_by': {'type': 'string'},
-        'updated_at': {'type': 'datetime'},
-        'updated_by': {'type': 'string'}
+        'source_organization': {
+            'type': 'objectid',
+            'nullable': True
+        },
+        'title': {
+            'type': 'string',
+            'nullable': True
+        },
+        'description': {
+            'type': 'string',
+            'nullable': True
+        },
+        'author': {
+            'type': 'string',
+            'nullable': True
+        },
+        'published_date': {
+            'type': 'datetime',
+            'nullable': True
+        },
+        'image_url': {
+            'type': 'string',
+            'nullable': True
+        },
+        'image_width': {
+            'type': 'integer',
+            'nullable': True
+        },
+        'image_height': {
+            'type': 'integer',
+            'nullable': True
+        },
+        'thumbnail_url': {
+            'type': 'string',
+            'nullable': True
+        },
+        'thumbnail_width': {
+            'type': 'integer',
+            'nullable': True
+        },
+        'thumbnail_height': {
+            'type': 'integer',
+            'nullable': True
+        },
+        'audio_url': {
+            'type': 'string',
+            'nullable': True
+        },
+        'audio_length': {
+            'type': 'integer',
+            'nullable': True
+        },
+        'latitude': {
+            'type': 'number',
+            'nullable': True
+        },
+        'longitude': {
+            'type': 'number',
+            'nullable': True
+        },
+        'created_at': {
+            'type': 'datetime',
+            'nullable': True
+        },
+        'created_by': {
+            'type': 'string',
+            'nullable': True
+        },
+        'updated_at': {
+            'type': 'datetime',
+            'nullable': True
+        },
+        'updated_by': {
+            'type': 'string',
+            'nullable': True
+        }
     }
 }
 
 sources = {
     'item_title': 'sources',
     'schema': {
-        'name': {'type': 'string'},
-        'url': {'type': 'string'},
-        'email': {'type': 'string'},
-        'phone_number': {'type': 'string'},
-        'created_at': {'type': 'datetime'},
-        'created_by': {'type': 'string'},
-        'updated_at': {'type': 'datetime'},
-        'updated_by': {'type': 'string'}
+        'name': {
+            'type': 'string',
+            'required': True
+        },
+        'url': {
+            'type': 'string',
+            'nullable': True
+        },
+        'email': {
+            'type': 'string',
+            'nullable': True
+        },
+        'phone_number': {
+            'type': 'string',
+            'nullable': True
+        },
+        'created_at': {
+            'type': 'datetime',
+            'nullable': True
+        },
+        'created_by': {
+            'type': 'string',
+            'nullable': True
+        },
+        'updated_at': {
+            'type': 'datetime',
+            'nullable': True
+        },
+        'updated_by': {
+            'type': 'string',
+            'nullable': True
+        }
     }
 }
 

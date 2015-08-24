@@ -56,7 +56,8 @@ def view_digital_asset(id):
 @digital_assets.route('/<string:id>/edit', methods=['GET', 'POST'])
 @login_required
 def edit_digital_asset(id):
-    return render_template('digital_assets/edit_digital_asset.html')
+    return render_template('digital_assets/edit_digital_asset.html',
+                           digital_asset_id=id)
 
 
 @digital_assets.route('/<string:id>/delete', methods=['POST'])

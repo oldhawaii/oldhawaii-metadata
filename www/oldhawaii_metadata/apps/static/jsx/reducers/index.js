@@ -14,6 +14,28 @@ const initialDigitalAssetState = {
 
 export function digital_assets(state = initialDigitalAssetState, action) {
   switch (action.type) {
+    case actions.LOAD_DIGITAL_ASSET:
+      return Object.assign({}, state, {
+        isSubmitting: false,
+        error: action.error
+      });
+    case actions.LOAD_DIGITAL_ASSET_SUCCESS:
+      const load_da = new DigitalAsset();
+      delete action.payload._links;
+      delete action.payload._created;
+      delete action.payload._updated;
+      Object.assign(load_da, action.payload);
+      load_da._id = action.payload._id;
+      return Object.assign({}, state, {
+        isSubmitting: false,
+        error: action.error,
+        digital_asset: load_da
+      });
+    case actions.LOAD_DIGITAL_ASSET_FAILURE:
+      return Object.assign({}, state, {
+        isSubmitting: false,
+        error: action.error
+      });
     case actions.CHANGE_DIGITAL_ASSET_FORM:
       const new_da = new DigitalAsset();
       Object.assign(new_da, state.digital_asset);
@@ -64,6 +86,23 @@ export function digital_assets(state = initialDigitalAssetState, action) {
       return Object.assign({}, state, {
         dropzone_file_stats: action.payload,
         digital_asset: new_with_image,
+        error: action.error
+      });
+    case actions.UPDATE_DIGITAL_ASSET:
+      return Object.assign({}, state, {
+        isSubmitting: true,
+        error: action.error,
+        digital_asset: action.payload
+      });
+    case actions.UPDATE_DIGITAL_ASSET_SUCCESS:
+      return Object.assign({}, state, {
+        isSubmitting: false,
+        error: action.error,
+        digital_asset: action.payload
+      });
+    case actions.UPDATE_DIGITAL_ASSET_FAILURE:
+      return Object.assign({}, state, {
+        isSubmitting: false,
         error: action.error
       });
     default:

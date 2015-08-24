@@ -40,7 +40,7 @@ def read(id):
     return jsonify(digital_asset)
 
 
-@digital_assets_api.route('/<string:id>', methods=['POST'])
+@digital_assets_api.route('/<string:id>', methods=['PUT'])
 @login_required
 def update(id):
     json_data = json.loads(request.data)

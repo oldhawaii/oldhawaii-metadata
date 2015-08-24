@@ -3,16 +3,29 @@
 import React from 'react';
 import configureStore from './store';
 import { Provider } from 'react-redux';
-import DigitalAssetFormContainer from './containers/DigitalAssetFormContainer';
+import EditDigitalAssetFormContainer
+  from './containers/EditDigitalAssetFormContainer';
+import DigitalAssetFormContainer
+  from './containers/DigitalAssetFormContainer';
 
 const store = configureStore();
-const digitalAssetFormElement = document.getElementById('digital_asset_form');
+const daFormElement = document.getElementById('digital_asset_form');
 
 document.addEventListener('DOMContentLoaded', function () {
-  React.render(
-    <Provider store={store}>
-      {() => <DigitalAssetFormContainer />}
-    </Provider>,
-    digitalAssetFormElement
-  );
+  if (daFormElement.hasAttribute('data-digital-asset-id')) {
+    const id = daFormElement.getAttribute('data-digital-asset-id');
+    React.render(
+      <Provider store={store}>
+        {() => <EditDigitalAssetFormContainer digital_asset_id={id}/>}
+      </Provider>,
+      daFormElement
+    );
+  } else {
+    React.render(
+      <Provider store={store}>
+        {() => <DigitalAssetFormContainer />}
+      </Provider>,
+      daFormElement
+    );
+  }
 });

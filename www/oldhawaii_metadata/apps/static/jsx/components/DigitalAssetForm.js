@@ -105,16 +105,14 @@ class DigitalAssetForm extends React.Component {
 
     let dropzone = null;
 
-    // TODO Not sure this is a good check
-    if (this.props.dropzone_file_stats == null) {
+    if (this.props.digital_asset.image_url == null) {
       dropzone = <DropzoneComponent config={componentConfig}
                            djsConfig={djsConfig}
                            eventHandlers={eventHandlers}/>;
     } else {
-      // TODO: Needs to also replace form elements
       dropzone = (<div className='form-group'>
                   <img height='50%'
-                       src={this.props.dropzone_file_stats.image_url}
+                       src={this.props.digital_asset.image_url}
                        width='50%'/>
                   <br/>
                   <label htmlFor='image_url'>Image URL</label>
@@ -191,7 +189,6 @@ class DigitalAssetForm extends React.Component {
                  name='longitude'
                  placeholder='Longitude'
                  readOnly
-
                  step='any'
                  type='number'
                  value={this.props.digital_asset.longitude}></input>

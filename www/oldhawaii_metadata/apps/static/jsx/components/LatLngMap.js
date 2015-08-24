@@ -25,10 +25,18 @@ class LatLngMap extends React.Component {
   componentDidMount() {
     const component = this;
     GoogleMapsLoader.load(function (google) {
+      let center = null;
+      if (component.props.lat && component.props.lng) {
+        center = new google.maps.LatLng(component.props.lat,
+                                              component.props.lng);
+      } else {
+        center = new google.maps.LatLng(21.3114, -157.7964);
+      }
+
       const mapOptions = {
         minZoom: 12,
         zoom: 14,
-        center: new google.maps.LatLng(21.3114, -157.7964)
+        center: center
       };
 
       const map = new google.maps.Map(component.refs.map_canvas.getDOMNode(),
@@ -37,6 +45,10 @@ class LatLngMap extends React.Component {
       google.maps.event.addListener(map, 'click', function (event) {
         component.placeMarker(google, map, event.latLng);
       });
+
+      if (component.props.lat && component.props.lng) {
+        component.placeMarker(google, map, center);
+      }
 
       component.setState({map: map});
     });

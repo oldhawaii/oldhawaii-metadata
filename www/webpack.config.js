@@ -1,7 +1,7 @@
 var webpack = require('webpack'),
        path = require('path'),
       paths = require('./build.config'),
-  WebpackNotifierPlugin = require('webpack-notifier');
+  AnyBarWebpackPlugin = require('anybar-webpack');
 
 module.exports = {
   entry: {
@@ -15,8 +15,8 @@ module.exports = {
   },
   module: {
     loaders: [
-      { test: /\.jsx|\.js$/, loaders: ["babel-loader"], exclude: path.resolve(__dirname, "node_modules") },
-      {test: /\.js$/, loader: "eslint-loader", exclude: path.resolve(__dirname, "node_modules") },
+      { test: /\.jsx|\.js$/, loaders: ['babel-loader', 'flowcheck'], exclude: path.resolve(__dirname, "node_modules") },
+      { test: /\.js$/, loader: 'eslint-loader', exclude: path.resolve(__dirname, "node_modules") },
       { test: /\.scss$/, loader: "style!css!sass" },
       { test: /\.woff2?(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&minetype=application/font-woff" },
       { test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,    loader: "url?limit=10000&minetype=application/octet-stream" },
@@ -28,7 +28,7 @@ module.exports = {
     configFile: '.eslintrc'
   },
   plugins: [
-    new WebpackNotifierPlugin(),
-    new webpack.NoErrorsPlugin()
+    new webpack.NoErrorsPlugin(),
+    new AnyBarWebpackPlugin()
   ]
 };

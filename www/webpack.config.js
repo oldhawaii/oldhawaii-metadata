@@ -4,6 +4,7 @@ var webpack = require('webpack'),
   AnyBarWebpackPlugin = require('anybar-webpack');
 
 module.exports = {
+  debug: true,
   entry: {
     digital_asset_form: [paths.js.digital_asset_form.src_files],
     source_form: [paths.js.source_form.src_files],
@@ -15,7 +16,7 @@ module.exports = {
   },
   module: {
     loaders: [
-      { test: /\.jsx|\.js$/, loaders: ['babel-loader', 'flowcheck'], exclude: path.resolve(__dirname, "node_modules") },
+      { test: /\.jsx|\.js$/, loader: 'babel', exclude: path.resolve(__dirname, "node_modules") },
       { test: /\.js$/, loader: 'eslint-loader', exclude: path.resolve(__dirname, "node_modules") },
       { test: /\.scss$/, loader: "style!css!sass" },
       { test: /\.woff2?(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&minetype=application/font-woff" },

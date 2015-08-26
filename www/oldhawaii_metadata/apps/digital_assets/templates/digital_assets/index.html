@@ -15,6 +15,7 @@
     <thead>
         <tr>
             <th>Id</th>
+            <th>Source</th>
             <th>Title</th>
             <th>Description</th>
             <th>Author</th>
@@ -24,9 +25,15 @@
     </thead>
     <tbody>
         {% if digital_assets %}
+
             {% for digital_asset in digital_assets %}
             <tr>
                 <td><a href="{{ url_for('digital_assets.view_digital_asset', id=digital_asset._id) }}">{{ digital_asset._id }}</td>
+                {% if digital_asset.source_organization %}
+                    <td><a href="{{ url_for('sources.view_source', id=digital_asset.source_organization) }}">{{ digital_asset.source_organization }}</td>
+                {% else %}
+                    <td></td>
+                {% endif %}
                 <td>{{ digital_asset.title }}</td>
                 <td>{{ digital_asset.description }}</td>
                 <td>{{ digital_asset.author }}</td>

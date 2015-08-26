@@ -17,6 +17,7 @@ class EditDigitalAssetForm extends DigitalAssetForm {
   }
 
   componentDidMount() {
+    super.componentDidMount();
     this.props.load_digital_asset(this.props.digital_asset_id);
   }
 

@@ -46,10 +46,10 @@ The WWW server is a [Flask](http://flask.pocoo.org/) implementation with a
   * ~~Need to add update source organization~~
   * ~~Need to add csrf token to metatag for source put/post requests~~
   * ~~Need to add delete source organization~~
-  * Need to convert to redux-actions/transducers
+  * ~~Need to add select for source organization~~
+  * Need to convert to redux-actions/transducers (too crufty)
   * Need to cleanup registration process
   * Need to add user roles
-  * Need to add auto-complete for source organization
   * Need to add Flask-Sentinel to API server
   * ~~Need to add os-level build notifications~~
   * Need to check all falsey code. Who knows if I did this right? :D

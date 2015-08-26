@@ -142,14 +142,16 @@ class DigitalAssetForm extends React.Component {
       <form onSubmit={this.submit} role='form'>
         {dropzone}
         <div className='form-group'>
-          <label htmlFor='source'>Source</label>
+          <label htmlFor='source_organization'>Source</label>
           <select className='form-control'
-                 id='source'
-                 name='source'
-                 onChange={this.handleChange('source')}>
+                 id='source_organization'
+                 name='source_organization'
+                 onChange={this.handleChange('source_organization')}>
                  { this.props.source_options.map(option =>
-                   <option value={option._id}>
-                      {option.name}
+                   <option key={option._id} selected={
+                     this.props.digital_asset.source_organization ===
+                       option._id} value={option._id}>
+                         {option.name}
                    </option>)
                  }
           </select>

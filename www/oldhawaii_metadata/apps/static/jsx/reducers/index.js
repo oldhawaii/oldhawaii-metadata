@@ -5,16 +5,23 @@ import DigitalAsset from '../models/DigitalAsset';
 import Source from '../models/Source';
 
 const initialDigitalAssetState = {
+  digital_asset: new DigitalAsset(),
   dropzone: null,
   dropzone_file_stats: null,
   error: false,
   isSubmitting: false,
-  digital_asset: new DigitalAsset()
+  source_options: []
 };
 
 export function digital_assets(state = initialDigitalAssetState, action) {
   switch (action.type) {
-    case actions.LOAD_DIGITAL_ASSET:
+    case actions.LOADED_DIGITAL_ASSET_FORM_SUCCESS:
+      return Object.assign({}, state, {
+        isSubmitting: false,
+        error: action.error,
+        source_options: action.payload._items
+      });
+    case actions.LOADED_DIGITAL_ASSET_FORM_FAILURE:
       return Object.assign({}, state, {
         isSubmitting: false,
         error: action.error

@@ -17,6 +17,10 @@ class DigitalAssetForm extends React.Component {
     return 'DigitalAssetForm';
   }
 
+  componentDidMount() {
+    this.props.loaded_digital_asset_form();
+  }
+
   handleChange(key) {
     return function (e) {
       this.props.change_digital_asset_form(key, e.target.value);
@@ -138,6 +142,19 @@ class DigitalAssetForm extends React.Component {
       <form onSubmit={this.submit} role='form'>
         {dropzone}
         <div className='form-group'>
+          <label htmlFor='source'>Source</label>
+          <select className='form-control'
+                 id='source'
+                 name='source'
+                 onChange={this.handleChange('source')}>
+                 { this.props.source_options.map(option =>
+                   <option value={option._id}>
+                      {option.name}
+                   </option>)
+                 }
+          </select>
+        </div>
+        <div className='form-group'>
           <label htmlFor='title'>Title</label>
           <input className='form-control'
                  id='title'
@@ -211,7 +228,9 @@ DigitalAssetForm.propTypes = {
   dropzone_load_success: React.PropTypes.function,
   dropzone_upload_success: React.PropTypes.function,
   error: React.PropTypes.bool,
-  isSubmitting: React.PropTypes.bool
+  isSubmitting: React.PropTypes.bool,
+  loaded_digital_asset_form: React.PropTypes.function,
+  source_options: React.PropTypes.array
 };
 
 export default DigitalAssetForm;

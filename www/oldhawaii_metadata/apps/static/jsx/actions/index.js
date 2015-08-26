@@ -1,5 +1,10 @@
 import request from 'superagent';
 
+export const LOADED_DIGITAL_ASSET_FORM = 'LOADED_DIGITAL_ASSET_FORM';
+export const LOADED_DIGITAL_ASSET_FORM_SUCCESS =
+'LOADED_DIGITAL_ASSET_FORM_SUCCESS';
+export const LOADED_DIGITAL_ASSET_FORM_FAILURE =
+'LOADED_DIGITAL_ASSET_FORM_FAILURE';
 export const LOAD_DIGITAL_ASSET = 'LOAD_DIGITAL_ASSET';
 export const LOAD_DIGITAL_ASSET_SUCCESS = 'LOAD_DIGITAL_ASSET_SUCCESS';
 export const LOAD_DIGITAL_ASSET_FAILURE = 'LOAD_DIGITAL_ASSET_FAILURE';
@@ -44,6 +49,38 @@ function get_csrf_token_from_meta(csrf_meta_name = 'csrf-token',
   }
 
 // DIGITAL ASSET FORM
+
+export function loaded_digital_asset_form() {
+  return dispatch => {
+    request.get('/api/sources/')
+           .end(function (err, res) {
+              if (err) {
+                dispatch(loaded_digital_asset_form_failure(err));
+              } else if (res.ok) {
+                dispatch(loaded_digital_asset_form_success(res));
+              } else {
+                dispatch(loaded_digital_asset_form_failure(err));
+              }
+            });
+  };
+}
+
+export function loaded_digital_asset_form_success(response) {
+  const sources = JSON.parse(response.xhr.responseText);
+  return {
+    type: LOADED_DIGITAL_ASSET_FORM_SUCCESS,
+    payload: sources,
+    error: false
+  };
+}
+
+export function loaded_digital_asset_form_failure(error) {
+  return {
+    type: LOADED_DIGITAL_ASSET_FORM_FAILURE,
+    payload: error,
+    error: true
+  };
+}
 
 export function load_digital_asset(digital_asset_id) {
   return dispatch => {

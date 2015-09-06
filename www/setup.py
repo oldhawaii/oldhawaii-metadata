@@ -67,7 +67,8 @@ requires = [
     'Flask-WTF>=0.11',
     'bcrypt>=1.1.1',
     'gunicorn==19.3.0',
-    'requests==2.7.0'
+    'requests==2.7.0',
+    'structlog==15.2.0'
 ]
 
 tests_require = ['pytest']

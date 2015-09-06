@@ -4,7 +4,6 @@
 from flask import redirect
 from flask import request
 from flask import url_for
-from flask.ext.babel import lazy_gettext
 from flask.ext.wtf import Form as BaseForm
 from sqlalchemy.orm.exc import MultipleResultsFound
 from sqlalchemy.orm.exc import NoResultFound

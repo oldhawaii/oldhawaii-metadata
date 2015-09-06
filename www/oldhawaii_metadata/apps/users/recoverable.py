@@ -14,7 +14,7 @@ from .signals import reset_password_instructions_sent
 from .signals import reset_password_notice_sent
 from .utilities import generate_token
 
-from hnlmakerfaire.mail import send_mail
+from oldhawaii_metadata.mail import send_mail
 
 logger = get_logger()
 

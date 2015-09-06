@@ -10,7 +10,7 @@ from flask import current_app
 from flask import request
 from itsdangerous import URLSafeTimedSerializer
 
-from hnlmakerfaire.utilities import config_value
+from oldhawaii_metadata.utilities import config_value
 
 
 def generate_token(user_data, salt=None):

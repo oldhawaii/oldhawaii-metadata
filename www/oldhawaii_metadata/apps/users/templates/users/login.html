@@ -3,5 +3,45 @@
 {% extends 'layouts/base.html' %}
 
 {% block main_content %}
-{% include "users/_login.html" ignore missing with context %}
+
+<div id="login">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <strong>Sign in</strong>
+      </div>
+      <div class="panel-body">
+        <p>
+            <form action="{{ url_for('users.login') }}" method="POST">
+                {{ login_form.csrf_token }}
+                <div class="form-group {% if login_form.email.errors %}has-error has-feedback{% endif %}">
+                    <label for="email">Email address</label>
+                    <input type="text" class="form-control" name="email" {% if login_form.email.data %}value="{{login_form.email.data}}"{% endif %} required="true" autofocus="" aria-describedby="emailError"/>
+                    <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                    <span id="emailError" class="sr-only">(error)</span>
+                    {% if login_form.email.errors%}
+                      <p class="text-danger" role="alert">
+                      <small>{{ login_form.email.errors|join(' ') }}</small>
+                      </p>
+                    {% endif %}
+                </div>
+                <div class="form-group {% if login_form.password.errors %}has-error has-feedback{% endif %}">
+                    <label for="password">Password <a href="{{ url_for('users.forgot_password') }}">(forgot your password?)</a></label>
+                    <input type="password" class="form-control" name="password" aria-describedby="passwordError"/>
+                    <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                    <span id="passwordError" class="sr-only">(error)</span>
+                    {% if login_form.password.errors%}
+                      <p class="text-danger" role="alert">
+                      <small>{{ login_form.password.errors|join(' ') }}</small>
+                      </p>
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" value="true" id="remember_me" name="remember_me" {% if login_form.remember_me.data %}checked{% endif %}/> Remember me
+                </div>
+                <button class="btn btn-default" type="submit">Login</button>
+            </form>
+        </p>
+    </div>
+</div>
+
 {% endblock main_content %}

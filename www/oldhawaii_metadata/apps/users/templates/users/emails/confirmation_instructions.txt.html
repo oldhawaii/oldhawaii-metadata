@@ -1,0 +1,6 @@
+{% if confirmation_link is defined and confirmation_link %}
+Your next step is to confirm your email address.
+
+Please cut and paste {{ confirmation_link | safe }} into a browser.
+{% endif %}
+

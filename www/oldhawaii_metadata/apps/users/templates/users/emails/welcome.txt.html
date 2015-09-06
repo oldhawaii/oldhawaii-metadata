@@ -3,5 +3,5 @@ Thank you for registering.
 {% if confirmation_link is defined and confirmation_link %}
 Your next step is to confirm your email address.
 
-Please cut and paste <a href="{{ confirmation_link }}">{{ confirmation_link }}</a> into a browser.
+Please cut and paste {{ confirmation_link | safe }} into a browser.
 {% endif %}

@@ -5,12 +5,21 @@
 {% block main_content %}
 
 <div id="register">
-    <form action="{{ url_for('users.register') }}" method="POST">
-        {{ form.csrf_token }}
-        <h2>Please register</h2>
-        {{ forms.render(form) }}
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
-    </form>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <strong>Sign up</strong>
+      </div>
+      <div class="panel-body">
+        <p>
+            <form action="{{ url_for('users.register') }}" method="POST">
+                {{ register_form.csrf_token }}
+                {{ forms.render(register_form) }}
+                <button class="btn btn-default" type="submit">Register</button>
+            </form>
+        </p>
+      </div>
+    </div>
 </div>
 
 {% endblock main_content %}
+

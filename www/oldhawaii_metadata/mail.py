@@ -10,7 +10,8 @@ def send_mail(
         subject,
         sender,
         recipients,
-        template,
+        plain_template_path,
+        html_template_path,
         **context):
 
     if type(recipients) is not list:
@@ -20,11 +21,9 @@ def send_mail(
                   sender=sender,
                   recipients=recipients)
 
-    msg.body = render_template(
-        "{0}/{1}.txt".format('users/emails', template), **context)
+    msg.body = render_template(plain_template_path, **context)
 
-    msg.html = render_template(
-        "{0}/{1}.html".format('users/emails', template), **context)
+    msg.html = render_template(html_template_path, **context)
 
     mail.send(msg)
 
